@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "BrandonGrotesque";
+    src: url("../fonts/BrandonGrotesque-Light.woff2") format("woff2"),url("../fonts/BrandonGrotesque-Light.woff") format("woff"),url("../fonts/BrandonGrotesque-Light.otf") format("opentype");
+    font-style: normal;
+		font-weight: 300;
+}
+
+@font-face {
+    font-family: "BrandonGrotesque";
+    src: url("../fonts/BrandonGrotesque-Regular.woff2") format("woff2"),url("../fonts/BrandonGrotesque-Regular.woff") format("woff"),url("../fonts/BrandonGrotesque-Regular.otf") format("opentype");
+    font-style: normal;
+		font-weight: 400;
+}
+
+@font-face {
+    font-family: "BrandonGrotesque";
+    src: url("../fonts/BrandonGrotesque-Medium.woff2") format("woff2"),url("../fonts/BrandonGrotesque-Medium.woff") format("woff");
+    font-style: normal;
+		font-weight: 500;
+}
+
+@font-face {
+    font-family: "BrandonGrotesque";
+    src: url("../fonts/BrandonGrotesque-Bold.woff2") format("woff2"),url("../fonts/BrandonGrotesque-Bold.woff") format("woff"),url("../fonts/BrandonGrotesque-Bold.otf") format("opentype");
+    font-style: normal;
+		font-weight: 600;
+}
+
+@font-face {
+    font-family: "BrandonGrotesque";
+    src: url("../fonts/BrandonGrotesque-Black.woff2") format("woff2"),url("../fonts/BrandonGrotesque-Black.woff") format("woff"),url("../fonts/BrandonGrotesque-Black.otf") format("opentype");
+    font-style: normal;
+		font-weight: 700;
+}
+
+
+body{
+	font-family: 'BrandonGrotesque', sans-serif;
+	font-size: 18px;
+	font-weight: 400;
+}
+
+.stripe-right{
+	@apply bg-brand-aqua;
+	clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 80%);
+}
+
+.stripe-left{
+	@apply bg-brand-aqua;
+	clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
+}
