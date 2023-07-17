@@ -1,12 +1,13 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Header(){
-	return (<header className="bg-brand-dark px-6 py-3.5 3xl:px-0">
-		<div className="flex justify-between items-center">
+	return (<header className="bg-brand-dark px-6 py-3.5 md:py-10 3xl:px-0">
+		<div className="flex justify-between items-center max-w-5xl md:mx-auto">
 
 			<div className="">
 				<Image
-					className="w-16"
+					className="w-16 md:w-32"
 					src="/abbott.svg"
 					alt="Abbott"
 					width={474}
@@ -15,13 +16,15 @@ export default function Header(){
 			</div>
 			
 			<div className="">
-				<Image
-					className="w-40"
-					src="/logo.svg"
-					alt="Nutri Pronto - Nutrition for oncology patients"
-					width={1241}
-					height={132}
-					priority />
+				<Link href="/">
+					<Image
+						className="w-40 md:w-[270px]"
+						src="/logo.svg"
+						alt="Nutri Pronto - Nutrition for oncology patients"
+						width={1241}
+						height={132}
+						priority />
+				</Link>
 			</div>
 
 		</div>
