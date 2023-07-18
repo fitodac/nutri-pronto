@@ -10,6 +10,7 @@ export default function StartPage(){
 
 	const [forbiden, setForbiden] = useState(false)
 
+
 	return (<main className="bg-brand-aqua text-brand-dark min-h-screen flex flex-col">
 		<Header />
 
