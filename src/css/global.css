@@ -50,15 +50,15 @@ body{
 }
 
 .stripe-right{
-	@apply bg-brand-aqua;
+	@apply bg-brand-aqua will-change-auto;
 	clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 80%);
 }
 
 .stripe-left{
-	@apply bg-brand-aqua;
+	@apply bg-brand-aqua will-change-auto;
 	clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
 }
 
 .page-title{
-	@apply text-2xl font-bold leading-tight select-none md:text-4xl;
+	@apply text-3xl font-bold leading-tight select-none md:text-4xl;
 }
