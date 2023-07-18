@@ -13,8 +13,9 @@ module.exports = {
 				brand: {
 					dark: '#1E272E',
 					aqua: {
-						DEFAULT: '#71C3BD',
-						600: '#28A399'
+						300: 			'#E1F1ED',
+						DEFAULT: 	'#71C3BD',
+						600: 			'#28A399'
 					}
 				}
 			},

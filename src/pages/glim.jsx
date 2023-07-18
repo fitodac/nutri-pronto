@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import gsap from 'gsap'
 import Link from 'next/link'
 
@@ -14,7 +14,8 @@ export default function GlimPage(){
 	const [sent, setSent] = useState(false)
 	const [error, setError] = useState(false)
 	const [malnutrition, setMalnutrition] = useState(null)
-	const [breadcrumb, setBreadcrumb] = useState('pronto')
+	const [breadcrumb, setBreadcrumb] = useState('glim')
+	const [step, setStep] = useState(1)
 
 	useEffect(() => {
 
@@ -33,17 +34,147 @@ export default function GlimPage(){
 	}
 
 
-	return (<Layout status="glim">
-		<div className="text-center py-8 md:pt-16 md:pb-10">
-			<div id="pageTitle" className="page-title">DATOS ANTROPOMÉTRICOS</div>
-		</div>
+	return (<Layout status={breadcrumb}>
 
 		{ !sent ? 
-			(<>
-				<div id="introText" className="text-brand-aqua-600 font-medium">Por favor, indique los siguientes datos de su paciente:</div>
-			</>)
+			(<form className="mt-6" onSubmit={submit}>
+				{ step === 1 ? 
+					(<>
+						<div className="text-center py-8 md:pt-16 md:pb-10">
+							<div id="pageTitle" className="page-title">DATOS ANTROPOMÉTRICOS</div>
+						</div>
+
+						<div id="introText" className="text-center">Por favor, indique los siguientes datos de su paciente:</div>
+
+						
+						<section className="space-y-3 max-w-sm mx-auto">
+
+							<label className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center">
+								<span className="pl-4 py-2">Talla (m):</span>
+								<input 
+									type="text" 
+									className="bg-transparent flex-1 px-4 py-2 focus:outline-none" />
+							</label>
+
+							<label className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center">
+								<span className="pl-4 py-2">Peso actual (kg):</span>
+								<input 
+									type="text" 
+									className="bg-transparent flex-1 px-4 py-2 focus:outline-none" />
+							</label>
+
+							<label className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center">
+								<span className="pl-4 py-2">Peso habitual (kg):</span>
+								<input 
+									type="text" 
+									className="bg-transparent flex-1 px-4 py-2 focus:outline-none" />
+							</label>
+
+						</section>
+
+						<section className="mt-8 space-y-2 max-w-sm mx-auto">
+							<div className="text-center">Cálculo peso perdido (kg):</div>
+							<div className="bg-brand-aqua border-b-4 border-brand-dark text-2xl font-semibold text-center p-2">00,00 kg</div>
+						</section>
+
+						<div className="mt-4 flex gap-x-8 max-w-sm mx-auto">
+							<button className="bg-white border border-stone-300 p-2 flex-1">&lt; 6 MESES</button>
+							<button className="bg-white border border-stone-300 p-2 flex-1">&gt; 6 MESES</button>
+						</div>
+
+						<section className="mt-8 space-y-2 max-w-sm mx-auto">
+							<div className="text-center">Cálculo de IMC actual (kg/m<sup className="text-xxs">2</sup>):</div>
+							<div className="bg-brand-aqua border-b-4 border-brand-dark text-2xl font-semibold text-center p-2">00,00 kg</div>
+						</section>
+
+						<div id="nextButton" className="pt-14 flex justify-center">
+							<button 
+								type="button"
+								className="bg-brand-aqua text-white font-bold px-9 py-2.5 transition-all hover:opacity-80"
+								onClick={() => setStep(2)}>
+								CONTINUAR
+							</button>
+						</div>
+					</>)
+					:
+					(<>
+						<div className="text-center pt-8 pb-6 max-w-xs mx-auto md:pt-16 md:pb-10">
+							<div className="page-title">CRITERIOS GLIM PARA EL DIAGNÓSTICO DE DESNUTRICIÓN*</div>
+						</div>
+
+						<div className="text-center max-w-sm mx-auto">*Diagnóstico de desnutrición: requiere al menos 1 criterio fenotípico y 1 criterio etiológico.</div>
+
+						<fieldset>
+							<legend className="text-center">
+								<div className="bg-brand-aqua w-24 h-1 mx-auto mt-10"></div>
+								<div className="page-title text-brand-aqua mt-5">CRITERIO FENOTÍPICO</div>
+							</legend>
+
+							<section className="mt-7 space-y-6">
+								<div className="text-brand-aqua font-medium">Por favor, responda las siguientes preguntas sobre su paciente:</div>
+
+								<div className="space-y-2">
+									<div className="">Pérdida de peso (%):</div>
+									<div className="bg-brand-aqua font-medium px-3 py-1.5">5-10% en los últimos 6 meses</div>
+								</div>
+
+								<div className="space-y-2">
+									<div className="">Bajo IMC (kg/m<sup className="text-xxs">2</sup>):</div>
+									<div className="bg-brand-aqua font-medium px-3 py-1.5">&lt; 20 en &lt; 70 años</div>
+								</div>
+
+								<div className="space-y-2">
+									<div className="">Masa muscular reducida:</div>
+									<select name="" id="" className="border border-brand-aqua w-full px-2 py-1 focus:outline-none">
+										<option value="">Selecciona</option>
+										<option value="">Déficit leve a moderado</option>
+										<option value="">Déficit severo</option>
+										<option value="">No aplica</option>
+									</select>
+								</div>
+							</section>
+						</fieldset>
 
 
+						<fieldset>
+							<legend className="text-center pt-5">
+								<div className="bg-brand-aqua w-24 h-1 mx-auto mt-10"></div>
+								<div className="page-title text-brand-aqua mt-5">CRITERIO ETIOLÓGICO</div>
+							</legend>
+
+							<section className="mt-7 space-y-6">
+								<div className="text-brand-aqua font-medium">Por favor, responda las siguientes preguntas sobre su paciente:</div>
+
+								<div className="space-y-2">
+									<div className="">Reducción de la ingesta o asimilación de alimentos:</div>
+									<select name="" id="" className="border border-brand-aqua w-full px-2 py-1 focus:outline-none">
+										<option value="">Selecciona</option>
+										<option value="">&lt;50% de las necesidades energéticas &gt;1 semana</option>
+										<option value="">Cualquier reducción durante &gt;2 semanas</option>
+										<option value="">Cualquier condición GI crónica que tenga un impacto adverso en la asmilación o absorción de alimentos</option>
+										<option value="">No aplica</option>
+									</select>
+								</div>
+
+								<div className="space-y-2">
+									<div className="">Inflamación:</div>
+									<select name="" id="" className="border border-brand-aqua w-full px-2 py-1 focus:outline-none">
+										<option value="">Selecciona</option>
+										<option value="">Relacionada a enfermedad/lesión aguda</option>
+										<option value="">Relacionada a enfermedad/lesión crónica</option>
+										<option value="">No aplica</option>
+									</select>
+								</div>
+							</section>
+						</fieldset>
+
+						<div id="submitButton" className="pt-14 flex justify-center">
+							<button className="bg-brand-aqua text-white font-bold px-9 py-2.5 transition-all hover:opacity-80">CONTINUAR</button>
+						</div>
+					</>)
+				}
+			</form>)
+			
 			:
 
 			(<Results 
