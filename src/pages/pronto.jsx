@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import gsap from 'gsap'
 import Link from 'next/link'
 
@@ -33,14 +33,30 @@ const list3 = [
 
 const form_value = {option1: null, option2: null, option3: null }
 
+
 export default function ProntoPage(){
 
 	const [form, setForm] = useState({...form_value})
-
 	const [sent, setSent] = useState(false)
 	const [error, setError] = useState(false)
 	const [malnutrition, setMalnutrition] = useState(null)
 	const [breadcrumb, setBreadcrumb] = useState('pronto')
+
+	useEffect(() => {
+		gsap.set('#introText', { top: 60, position: 'relative', opacity: 0 })
+		gsap.set('#pageTitle', { top: 60, position: 'relative', opacity: 0 })
+		gsap.set('#section1', { top: 60, position: 'relative', opacity: 0 })
+		gsap.set('#section2', { top: 60, position: 'relative', opacity: 0 })
+		gsap.set('#section3', { top: 60, position: 'relative', opacity: 0 })
+		gsap.set('#submitButton', { top: 60, position: 'relative', opacity: 0 })
+
+		gsap.to('#pageTitle', { top: 0, opacity: 1 })
+		gsap.to('#introText', { top: 0, opacity: 1, delay: .2 })
+		gsap.to('#section1', { top: 0, opacity: 1, delay: .4 })
+		gsap.to('#section2', { top: 0, opacity: 1, delay: .6 })
+		gsap.to('#section3', { top: 0, opacity: 1, delay: .8 })
+		gsap.to('#submitButton', { top: 0, opacity: 1, delay: 1 })
+	}, [])
 
 	const handleChange = e => {
 		const f = {...form}
@@ -52,7 +68,6 @@ export default function ProntoPage(){
 
 	const submit = e => {
 		e.preventDefault()
-		console.log('form', form)
 
 		if( form.option1 === null || form.option2 === null || form.option3 === null ){
 			setError(true)
@@ -74,17 +89,17 @@ export default function ProntoPage(){
 
 	return (<Layout status={breadcrumb}>
 		<div className="text-center py-8 md:pt-16 md:pb-10">
-			<div className="page-title">CUESTIONARIO PRONTO</div>
+			<div id="pageTitle" className="page-title">CUESTIONARIO PRONTO</div>
 		</div>
 
 		{ !sent ? 
 			(<>
-				<div className="text-brand-aqua-600 font-medium">Por favor, responda las siguientes preguntas sobre su paciente:</div>
+				<div id="introText" className="text-brand-aqua-600 font-medium">Por favor, responda las siguientes preguntas sobre su paciente:</div>
 
 				<form className="mt-6" onSubmit={submit}>
 					
 					<div className="space-y-10">
-						<section className="space-y-3">
+						<section id="section1" className="space-y-3">
 							<div className="">
 								<span className="font-semibold pr-1">1.</span>
 								<span className="">¿Ha perdido peso involuntariamente (5% a 10% o más) en los últimos 3-6 meses/ desde nuestra última consulta?</span>
@@ -109,7 +124,7 @@ export default function ProntoPage(){
 
 
 
-						<section className="space-y-3">
+						<section id="section2" className="space-y-3">
 							<div className="">
 								<span className="font-semibold pr-1">2.</span>
 								<span className="">¿Ha estado comiendo menos de lo habitual en la última semana/ desde nuestra última consulta?</span>
@@ -134,7 +149,7 @@ export default function ProntoPage(){
 
 
 
-						<section className="space-y-3">
+						<section id="section3" className="space-y-3">
 							<div className="">
 								<span className="font-semibold pr-1">3.</span>
 								<span className="">¿Ha perdido fuerza o se siente más débil que lo usual desde nuestra última consulta?</span>
@@ -159,7 +174,7 @@ export default function ProntoPage(){
 					</div>
 
 
-					<div className="pt-14 flex justify-center">
+					<div id="submitButton" className="pt-14 flex justify-center">
 						<button className="bg-brand-aqua text-white font-bold px-9 py-2.5 transition-all hover:opacity-80">CONTINUAR</button>
 					</div>
 
@@ -169,7 +184,7 @@ export default function ProntoPage(){
 			
 			:
 			
-			
+			// RESULTS
 			(<Results 
 				props={{
 					malnutrition,
@@ -206,12 +221,12 @@ export default function ProntoPage(){
 				</div>
 
 				<div className="mt-10 flex flex-col gap-4">
-					<div className="bg-brand-aqua text-white font-bold text-center leading-none max-w-xs p-4 mx-auto">ALGORITMO DE DECISIÓN DE NUTRICIÓN ENTERAL EN PACIENTE ONCOLÓGICO</div>
-					<Link href="/glim" className="bg-brand-aqua text-white font-bold text-center leading-none max-w-xs p-4 mx-auto">REALIZAR DIAGNÓSTICO GLIM</Link>
+					<div className="bg-brand-aqua text-white font-bold text-center leading-none w-full max-w-xs p-4 mx-auto select-none transition-all hover:opacity-80">ALGORITMO DE DECISIÓN DE NUTRICIÓN ENTERAL EN PACIENTE ONCOLÓGICO</div>
+					<Link href="/glim" className="bg-brand-aqua text-white font-bold text-center leading-none w-full max-w-xs p-4 mx-auto select-none transition-all hover:opacity-80">REALIZAR DIAGNÓSTICO GLIM</Link>
 				</div>
-			</Results>) 
+			</Results>)
 		}
-		
+
 
 		{ error ? 
 			(<div 
@@ -224,6 +239,6 @@ export default function ProntoPage(){
 			</div>) :
 			null 
 		}
-		
+
 	</Layout>)
 }
