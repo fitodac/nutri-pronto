@@ -13,13 +13,15 @@ export default function Layout({status, children}){
 
 				<div className={`${button_class} ${'pronto' === status ? 'bg-brand-aqua-600' : ''}`}>PRONTO</div>
 
-				<div className={`${button_class}`}>GLIM</div>
+				<div className={`${button_class} ${'glim' === status ? 'bg-brand-aqua-600' : ''}`}>GLIM</div>
 
-				<div className={`${button_class}`}>RESULTADO</div>
+				<div className={`${button_class} ${'result' === status ? 'bg-brand-aqua-600' : ''}`}>RESULTADO</div>
 
 			</div>
 		</div>
 
 		<section className="max-w-3xl px-6 mx-auto 3xl:px-0">{children}</section>
+
+		<div className="text-xxs text-center pb-8 pt-10">{ process.env.FOOTER_CODE }</div>
 	</main>)
 }
