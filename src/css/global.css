@@ -60,5 +60,5 @@ body{
 }
 
 .page-title{
-	@apply text-3xl font-bold leading-tight select-none md:text-4xl;
+	@apply text-3xl font-bold leading-none select-none md:text-4xl;
 }
