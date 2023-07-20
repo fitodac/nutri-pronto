@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import gsap from 'gsap'
 
 import Image from 'next/image'
@@ -8,8 +9,12 @@ import '../css/global.css'
 
 export default function HomePage(){
 
+	const router = useRouter()
+
 	// Animation
 	useEffect(() => {
+		if( sessionStorage.getItem('nutripronto') ) router.push('/pronto')
+
 		gsap.to('#logo', 									{ scale: 1, opacity: 1, delay: .3 })
 		gsap.to('#stripe1', 							{ top: 0, opacity: 1, delay: .5 })
 		gsap.to('#stripe2', 							{ top: 0, opacity: 1, delay: .5 })
@@ -19,7 +24,7 @@ export default function HomePage(){
 		gsap.to('#stripe1', 							{ height: 0, opacity: 0, delay: 1.5 })
 		gsap.to('#intro', 								{ opacity: 1, duration: 1, smoothChildTiming: true, delay: 1.7 })
 		gsap.to('#termsConditionsLink', 	{ opacity: 1, delay: 2 })
-		gsap.to('#link', 									{ opacity: 1, delay: 2.1 })
+		gsap.to('#link', 									{ opacity: 1, pointerEvents: 'initial', delay: 2.1 })
 	}, [])
 
 	return (<main className="bg-brand-dark text-white min-h-screen">
@@ -56,7 +61,7 @@ export default function HomePage(){
 				<Link 
 					id="link"
 					href="/start" 
-					className="text-brand-dark transition-all opacity-0 hover:text-white md:text-2xl">EMPEZAR</Link>
+					className="text-brand-dark transition-all opacity-0 pointer-events-none hover:text-white md:text-2xl">EMPEZAR</Link>
 			</div>
 
 			<div className="flex justify-center pt-10 pb-6">
