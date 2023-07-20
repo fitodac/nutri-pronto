@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import gsap from 'gsap'
-import Link from 'next/link'
 
 import Layout from '../layouts/Layout'
 import List from '../components/List'
-import Results from '../components/Results'
+// import Results from '../components/Results'
+import Results from '../components/ResultsPronto'
 
 const label_class = 'flex items-center gap-x-2 leading-none cursor-pointer select-none group'
 const input_class = `hidden 
@@ -31,7 +31,8 @@ const list3 = [
 	['¿Ha tenido que añadir agujeros a su cinturón?']
 ]
 
-const form_value = {option1: null, option2: null, option3: null }
+// const form_value = { option1: null, option2: null, option3: null }
+const form_value = { option1: 1, option2: 1, option3: 1 }
 
 
 export default function ProntoPage(){
@@ -39,10 +40,12 @@ export default function ProntoPage(){
 	const [form, setForm] = useState({...form_value})
 	const [sent, setSent] = useState(false)
 	const [error, setError] = useState(false)
-	const [malnutrition, setMalnutrition] = useState(null)
 	const [breadcrumb, setBreadcrumb] = useState('pronto')
 
 	useEffect(() => {
+		sessionStorage.setItem('nutripronto', 1)
+		sessionStorage.removeItem('nutripronto_result')
+
 		gsap.set('#introText', { top: 60, position: 'relative', opacity: 0 })
 		gsap.set('#pageTitle', { top: 60, position: 'relative', opacity: 0 })
 		gsap.set('#section1', { top: 60, position: 'relative', opacity: 0 })
@@ -64,7 +67,12 @@ export default function ProntoPage(){
 		setForm(f)
 	}
 
-	const formReset = () => setForm({...form_value})
+	const formReset = () => {
+		setForm({...form_value})
+		setBreadcrumb('pronto')
+		sessionStorage.removeItem('nutripronto_result')
+		setSent(false)
+	}
 
 	const submit = e => {
 		e.preventDefault()
@@ -80,7 +88,11 @@ export default function ProntoPage(){
 				})
 			}, 100)
 		}else{
-			if( form.option1 === 1 && form.option2 === 1 && form.option3 === 1 ){ setMalnutrition('SÍ') }else{ setMalnutrition('NO') }
+			if( form.option1 === 1 && form.option2 === 1 && form.option3 === 1 ){ 
+				sessionStorage.setItem('nutripronto_result', 'SÍ')
+			}else{ 
+				sessionStorage.setItem('nutripronto_result', 'NO')
+			}
 			setBreadcrumb('result')
 			setSent(true)
 		}
@@ -93,7 +105,7 @@ export default function ProntoPage(){
 		</div>
 
 		{ !sent ? 
-			(<>
+			(<div className="max-w-md mx-auto">
 				<div id="introText" className="text-brand-aqua-600 font-medium">Por favor, responda las siguientes preguntas sobre su paciente:</div>
 
 				<form className="mt-6" onSubmit={submit}>
@@ -179,52 +191,13 @@ export default function ProntoPage(){
 					</div>
 
 				</form>
-			</>) 
+			</div>) 
 			
 			
 			:
 			
 			// RESULTS
-			(<Results 
-				props={{
-					malnutrition,
-					footer_reset_btn: "NUEVA VALORACIÓN PRONTO",
-					formReset: () => { 
-						setSent(false); 
-						formReset(); 
-						setMalnutrition(null); 
-						setBreadcrumb('pronto'); 
-					}
-				}}>
-				<div className="text-center mt-3">Intervención nutricional recomendada:</div>
-
-				<div className="leading-tight space-y-6 mt-6">
-					<div className="flex gap-x-4">
-						<div className=""></div>
-						<div className="pl-4 relative">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-brand-dark w-2 left-0 top-2 absolute">
-								<path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"></path>
-							</svg>
-							<p>Es posible que su paciente necesite un tratamiento nutricional basándonos en las guías ESPEN/ESMO para pacientes con cáncer.</p>
-						</div>
-					</div>
-
-					<div className="flex gap-x-4">
-						<div className=""></div>
-						<div className="pl-4 relative">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-brand-dark w-2 left-0 top-2 absolute">
-								<path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"></path>
-							</svg>
-							<p>A continuación, desde Abbott Nutrition le facilitamos un algoritmo de decisión de nutrición enteral en paciente oncológico, donde podrá igualmente valorar los suplementos nutricionales valorar los suplementos nutricionales que mejor respondan a las necesidades de su paciente.</p>
-						</div>
-					</div>
-				</div>
-
-				<div className="mt-10 flex flex-col gap-4">
-					<div className="bg-brand-aqua text-white font-bold text-center leading-none w-full max-w-xs p-4 mx-auto select-none transition-all hover:opacity-80">ALGORITMO DE DECISIÓN DE NUTRICIÓN ENTERAL EN PACIENTE ONCOLÓGICO</div>
-					<Link href="/glim" className="bg-brand-aqua text-white font-bold text-center leading-none w-full max-w-xs p-4 mx-auto select-none transition-all hover:opacity-80">REALIZAR DIAGNÓSTICO GLIM</Link>
-				</div>
-			</Results>)
+			(<Results props={{ formReset: () => formReset() }} />)
 		}
 
 
