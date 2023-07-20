@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Header from '../components/Header'
 import Link from 'next/link'
 
+import '../css/global.css'
 
 const button_class = 'bg-brand-dark text-sm font-bold text-white text-center leading-none w-full p-3 block select-none transition-all hover:opacity-90 md:text-xl md:leading-none md:pb-2'
 
