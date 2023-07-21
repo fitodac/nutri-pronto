@@ -46,8 +46,8 @@ export default function ProntoPage(){
 		sessionStorage.setItem('nutripronto', 1)
 		sessionStorage.removeItem('nutripronto_result')
 
-		gsap.set('#introText', { top: 60, position: 'relative', opacity: 0 })
 		gsap.set('#pageTitle', { top: 60, position: 'relative', opacity: 0 })
+		gsap.set('#introText', { top: 60, position: 'relative', opacity: 0 })
 		gsap.set('#section1', { top: 60, position: 'relative', opacity: 0 })
 		gsap.set('#section2', { top: 60, position: 'relative', opacity: 0 })
 		gsap.set('#section3', { top: 60, position: 'relative', opacity: 0 })
@@ -94,6 +94,7 @@ export default function ProntoPage(){
 				sessionStorage.setItem('nutripronto_result', 'NO')
 			}
 			setBreadcrumb('result')
+			window.scrollTo({ top: 0, behavior: 'smooth' })
 			setSent(true)
 		}
 	}
