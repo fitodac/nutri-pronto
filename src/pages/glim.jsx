@@ -18,13 +18,16 @@ const form_value = {
 	imc: '00,00',
 
 	age: 0,
-	// muscle_mass: '',
-	// reduced_dietary_intake: '',
-	// inflammation: '',
+	muscle_mass: '',
+	reduced_dietary_intake: '',
+	inflammation: '',
 	
-	reduced_dietary_intake: '&lt;50% de las necesidades energéticas &gt;1 semana',
-	muscle_mass: 'Déficit leve a moderado',
-	inflammation: 'Relacionada a enfermedad/lesión aguda',
+	// muscle_mass: 'Déficit leve a moderado',
+	// reduced_dietary_intake: '&lt;50% de las necesidades energéticas &gt;1 semana',
+	// inflammation: 'Relacionada a enfermedad/lesión aguda',
+	
+	// reduced_dietary_intake: 'No aplica',
+	// inflammation: 'No aplica',
 	
 	loss_weight_info: '',
 	low_imc: ''
@@ -52,9 +55,7 @@ const calculator = form => {
 		if( f.loss_weight_percent >= 20 ) f.loss_weight_info = `20% en ${calcSixMonths(f.more_than_6_months)}`
 	}
 	
-	if( weight && tall ){
-		f.imc = (weight / Math.pow(tall, 2)).toFixed(2).replace('.',',')
-	}
+	if( weight && tall ) f.imc = (weight / Math.pow(tall, 2)).toFixed(2).replace('.',',')
 
 
 	if( imc < 22 ){
@@ -73,8 +74,6 @@ const calculator = form => {
 			if( form.age ) f.low_imc = '< 22 en > 70 años'
 		}
 	}
-
-	console.log('f', f)
 
 	return f
 }
@@ -140,7 +139,6 @@ export default function GlimPage(){
 
 		if( isNaN( parseFloat(e.target.value) ) ){
 			f[e.target.name] = e.target.value
-			console.log('f', f)
 		}else{
 			if( regex.test(e.target.value) ){
 				if( e.target.value[0] === ',' || e.target.value[0] === '.' ) return forbidenCharacter()
@@ -234,6 +232,7 @@ export default function GlimPage(){
 		( 'No aplica' === form.reduced_dietary_intake && 'No aplica' == form.inflammation ) ? setDiagnosis('NO') : setDiagnosis('SÍ')
 		setBreadcrumb('result')
 		window.scrollTo({ top: 0, behavior: 'smooth' })
+		// console.log('form:', form)
 		setSent(true)
 	}
 

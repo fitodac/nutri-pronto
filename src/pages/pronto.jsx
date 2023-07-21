@@ -31,8 +31,8 @@ const list3 = [
 	['¿Ha tenido que añadir agujeros a su cinturón?']
 ]
 
-// const form_value = { option1: null, option2: null, option3: null }
-const form_value = { option1: 1, option2: 1, option3: 1 }
+const form_value = { option1: null, option2: null, option3: null }
+// const form_value = { option1: 1, option2: 1, option3: 1 }
 
 
 export default function ProntoPage(){
