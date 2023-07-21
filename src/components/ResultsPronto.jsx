@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
+import { jsPDF } from 'jspdf'
 
 import LinkToPdf from './LinkToPdf'
 import CreatePDF from './CreatePdf'
@@ -7,6 +8,14 @@ import CreatePDF from './CreatePdf'
 export default function ResultsPage({props}){
 
 	const [diagnosis, setDiagnosis] = useState(sessionStorage.getItem('nutripronto_result'))
+	const doc = new jsPDF()
+
+	const generatePDF = () => {
+		console.log('generatePDF')
+		doc.text('Hola mundo!', 10, 10)
+		doc.output("dataurlnewwindow")
+
+	}
 
 	return (<section>
 		<section className="max-w-md mx-auto">
@@ -64,7 +73,7 @@ export default function ResultsPage({props}){
 						NUEVA VALORACIÓN PRONTO
 					</button>
 
-					<CreatePDF />
+					<CreatePDF generatePDF={() => generatePDF()}/>
 				</div>
 			</div>
 		</div>
