@@ -5,7 +5,7 @@ import Header from '../components/Header'
 
 import '../css/global.css'
 
-const bc_class = 'text-sm px-6 py-1 sm:px-8 md:text-xl md:px-12 md:py-2'
+const bc_class = 'text-[16px] font-medium tracking-wide px-6 py-2 sm:px-8 md:text-xl md:px-12'
 
 export default function Layout({status, children}){
 
@@ -32,6 +32,6 @@ export default function Layout({status, children}){
 
 		<section className="max-w-3xl px-6 mx-auto 3xl:px-0">{children}</section>
 
-		<div id="mainFooter" className="text-xxs text-center pb-8 pt-10">{ process.env.FOOTER_CODE }</div>
+		<div id="mainFooter" className="text-xxs text-center pb-8 pt-10 select-none">{ process.env.FOOTER_CODE }</div>
 	</main>)
 }
