@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useRef } from 'react'
 import Link from 'next/link'
 import { jsPDF } from 'jspdf'
+import html2canvas from 'html2canvas'
 
 import LinkToPdf from './LinkToPdf'
 import CreatePDF from './CreatePdf'
@@ -9,28 +10,50 @@ import RecommendationsN from './RecommendationsN'
 
 export default function ResultsPage({props}){
 
-	const [diagnosis, setDiagnosis] = useState(sessionStorage.getItem('nutripronto_result'))
-	const doc = new jsPDF()
+	const diagnosis = sessionStorage.getItem('nutripronto_result')
+	const mainContainer = useRef(null)
+	const linkContainer = useRef(null)
 
-	const generatePDF = () => {
-		console.log('generatePDF')
-		doc.text('Hola mundo!', 10, 10)
-		doc.output("dataurlnewwindow")
+	// PDF
+	const generatePDF = async () => {
+		var doc = new jsPDF()
+		
+		await html2canvas(mainContainer.current).then(canvas => {
+			doc.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 43, 6, 
+				120, 
+				diagnosis === 'SÍ' ? 150 : 130, 
+				'mainContainer', 'NONE')
+		})
 
+		if( diagnosis === 'SÍ' ){
+			await html2canvas(linkContainer.current).then(canvas => {
+				doc.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 55, 160, 100, 20, 'linkContainer', 'NONE')
+				doc.link(55, 160, 100, 20, {url: process.env.LINK_2_PDF_DOCUMENT})
+			})
+		}
+
+		// doc.output('dataurlnewwindow')
+		doc.save(`pronto-${Date.now()}.pdf`)
 	}
+
 
 	return (<section>
 		<section className="max-w-md mx-auto">
+			<div ref={mainContainer} className="pb-10">
+				<div className="text-center pt-8 pb-5 md:pt-16 md:pb-10">
+					<div id="pageTitle" className="page-title">CUESTIONARIO PRONTO</div>
+				</div>
 
-			<div className="text-center -mt-4">Sospecha de desnutrición</div>
+				<div className="text-center">Sospecha de desnutrición</div>
 
-			<div className="bg-brand-dark border-b-4 border-brand-aqua text-white text-3xl font-bold text-center leading-none pt-3 pb-2 mt-3 select-none">{ diagnosis }</div>
+				<div className="bg-brand-dark border-b-4 border-brand-aqua text-white text-3xl font-bold text-center leading-none pt-3 pb-2 mt-3 select-none">{ diagnosis }</div>
 
-			<div className="page-title text-center mt-7">RECOMENDACIONES</div>
-			{ diagnosis === 'SÍ' ? <RecommendationsY /> : <RecommendationsN /> }
+				<div className="page-title text-center mt-7">RECOMENDACIONES</div>
+				{ diagnosis === 'SÍ' ? <RecommendationsY /> : <RecommendationsN /> }
+			</div>
 			
-			<div className="mt-10 flex flex-col gap-4">
-				{ diagnosis === 'SÍ' ? <LinkToPdf /> : null }
+			<div className="flex flex-col gap-4">
+				<div ref={linkContainer}>{ diagnosis === 'SÍ' ? <LinkToPdf /> : null }</div>
 
 				<Link href="/glim" className="bg-brand-aqua text-white font-bold text-center leading-none w-full max-w-xs p-4 mx-auto select-none transition-all hover:opacity-80">REALIZAR DIAGNÓSTICO GLIM</Link>
 			</div>

@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useRef } from 'react'
 import Link from 'next/link'
+import { jsPDF } from 'jspdf'
+import html2canvas from 'html2canvas'
 
 import LinkToPdf from './LinkToPdf'
 import CreatePDF from './CreatePdf'
@@ -8,41 +10,81 @@ import RecommendationsN from './RecommendationsN'
 
 export default function ResultsPage({props}){
 
-	const [diagnosis, setDiagnosis] = useState(sessionStorage.getItem('nutripronto_result'))
+	const diagnosis = sessionStorage.getItem('nutripronto_result')
+	const mainContainer = useRef(null)
+	const secondaryContainer = useRef(null)
+	const linkContainer = useRef(null)
+
+	// PDF
+	const generatePDF = async () => {
+		var doc = new jsPDF('p', 'mm', [200, (props.diagnosis === 'SÍ' ? 310 : 280)])
+		
+		await html2canvas(mainContainer.current).then(canvas => {
+			doc.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 43, 0, 
+				120, 
+				props.diagnosis === 'SÍ' ? 190 : 190, 
+				'mainContainer', 'NONE')
+		})
+
+		if( props.diagnosis === 'SÍ' ){
+			await html2canvas(linkContainer.current).then(canvas => {
+				doc.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 55, 190, 100, 20, 'linkContainer', 'NONE')
+				doc.link(55, 190, 100, 20, {url: process.env.LINK_2_PDF_DOCUMENT})
+			})
+		}
+
+		await html2canvas(secondaryContainer.current).then(canvas => {
+			doc.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 48, 
+				props.diagnosis === 'SÍ' ? 218 : 190, 
+				115, 
+				70, 
+				'secondaryContainer', 'NONE')
+		})
+
+		// doc.output('dataurlnewwindow')
+		doc.save(`pronto-${Date.now()}.pdf`)
+	}
+
 
 	return (<section>
 		<section className="max-w-md mx-auto pb-8">
-			<div className="text-center pt-8 pb-4 max-w-xs mx-auto md:pt-16 md:pb-10">
-				<div className="page-title">RESULTADO</div>
-			</div>
-
-			<div className="text-center">Sospecha de desnutrición:</div>
-
-			<div className="bg-brand-dark border-b-4 border-brand-aqua text-white text-3xl font-bold text-center leading-none pt-3 pb-2 mt-3 select-none">{ diagnosis }</div>
-
-			<div className="bg-brand-aqua-600 w-24 h-1 mx-auto mt-10"></div>
-			<div className="page-title text-brand-aqua-600 text-center mt-4">CRITERIOS GLIM</div>
-
-			<div className="mt-4">El diagnóstico de desnutrición de su paciente mediante los criterios GLIM es:</div>
-			<div className="bg-brand-aqua bg-opacity-90 border-b-4 border-brand-dark text-brand-dark text-3xl font-bold text-center leading-none pt-3 pb-2 mt-3 select-none">{props.diagnosis}</div>
-
-
-			<div className="page-title text-center mt-7">RECOMENDACIONES</div>
-			{ props.diagnosis === 'SÍ' ? <RecommendationsY /> : <RecommendationsN /> }
-			{ props.diagnosis === 'SÍ' ? <div className="mt-8 flex flex-col gap-4"><LinkToPdf /></div> : null }
-
-			<div className="bg-brand-aqua-600 w-24 h-1 mx-auto mt-10"></div>
-			<div className="page-title text-brand-aqua-600 text-center mt-4">DATOS ANTROPOMÉTRICOS</div>
-
-			<div className="mt-6 space-y-4">
-				<div className="space-y-2 max-w-md mx-auto">
-					<div className="">Cálculo de IMC actual (kg/m<sup className="text-xs">2</sup>):</div>
-					<div className="bg-brand-aqua border-b-4 border-brand-dark text-2xl font-semibold text-center p-2">{props.imc} kg</div>
+			<div ref={mainContainer} className="pb-10">
+				<div className="text-center pt-8 pb-4 max-w-xs mx-auto md:pt-16 md:pb-10">
+					<div className="page-title">RESULTADO</div>
 				</div>
 
-				<div className="space-y-2 max-w-md mx-auto">
-					<div className="">Cálculo peso perdido (kg):</div>
-					<div className="bg-brand-aqua border-b-4 border-brand-dark text-2xl font-semibold text-center p-2">{props.loss_weight} kg</div>
+				<div className="text-center">Sospecha de desnutrición:</div>
+
+				<div className="bg-brand-dark border-b-4 border-brand-aqua text-white text-3xl font-bold text-center leading-none pt-3 pb-2 mt-3 select-none">{ diagnosis }</div>
+
+				<div className="bg-brand-aqua-600 w-24 h-1 mx-auto mt-10"></div>
+				<div className="page-title text-brand-aqua-600 text-center mt-4">CRITERIOS GLIM</div>
+
+				<div className="mt-4">El diagnóstico de desnutrición de su paciente mediante los criterios GLIM es:</div>
+				<div className="bg-brand-aqua bg-opacity-90 border-b-4 border-brand-dark text-brand-dark text-3xl font-bold text-center leading-none pt-3 pb-2 mt-3 select-none">{props.diagnosis}</div>
+
+				<div className="page-title text-center mt-7">RECOMENDACIONES</div>
+				{ props.diagnosis === 'SÍ' ? <RecommendationsY /> : <RecommendationsN /> }
+			</div>
+
+			<div className="flex flex-col gap-4">
+				<div ref={linkContainer}>{ props.diagnosis === 'SÍ' ? (<><LinkToPdf /><div className="h-10" /></>) : null }</div>
+			</div>
+
+			<div ref={secondaryContainer}>
+				<div className="bg-brand-aqua-600 w-24 h-1 mx-auto"></div>
+				<div className="page-title text-brand-aqua-600 text-center mt-4">DATOS ANTROPOMÉTRICOS</div>
+
+				<div className="mt-6 space-y-4">
+					<div className="space-y-2 max-w-md mx-auto">
+						<div className="">Cálculo de IMC actual (kg/m<sup className="text-xs">2</sup>):</div>
+						<div className="bg-brand-aqua border-b-4 border-brand-dark text-2xl font-semibold text-center p-2">{props.imc} kg</div>
+					</div>
+
+					<div className="space-y-2 max-w-md mx-auto">
+						<div className="">Cálculo peso perdido (kg):</div>
+						<div className="bg-brand-aqua border-b-4 border-brand-dark text-2xl font-semibold text-center p-2">{props.loss_weight} kg</div>
+					</div>
 				</div>
 			</div>
 
@@ -64,7 +106,7 @@ export default function ResultsPage({props}){
 						NUEVA VALORACIÓN
 					</Link>
 
-					<CreatePDF />
+					<CreatePDF generatePDF={() => generatePDF()} />
 				</div>
 			</div>
 		</div>

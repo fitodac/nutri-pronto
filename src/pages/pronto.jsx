@@ -3,7 +3,6 @@ import gsap from 'gsap'
 
 import Layout from '../layouts/Layout'
 import List from '../components/List'
-// import Results from '../components/Results'
 import Results from '../components/ResultsPronto'
 
 const label_class = 'flex items-center gap-x-2 leading-none cursor-pointer select-none group'
@@ -101,12 +100,12 @@ export default function ProntoPage(){
 
 
 	return (<Layout status={breadcrumb}>
-		<div className="text-center py-8 md:pt-16 md:pb-10">
-			<div id="pageTitle" className="page-title">CUESTIONARIO PRONTO</div>
-		</div>
-
 		{ !sent ? 
 			(<div className="max-w-md mx-auto">
+				<div className="text-center py-8 md:pt-16 md:pb-10">
+					<div id="pageTitle" className="page-title">CUESTIONARIO PRONTO</div>
+				</div>
+
 				<div id="introText" className="text-brand-aqua-600 font-medium">Por favor, responda las siguientes preguntas sobre su paciente:</div>
 
 				<form className="mt-6" onSubmit={submit}>

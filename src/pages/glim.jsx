@@ -6,12 +6,12 @@ import Layout from '../layouts/Layout'
 import Results from '../components/ResultsGlim'
 
 const form_value = {
-	tall: '1,55',
-	weight: '50',
-	usual_weight: '58,3',
-	// tall: '',
-	// weight: '',
-	// usual_weight: '',
+	// tall: '1,55',
+	// weight: '50',
+	// usual_weight: '58,3',
+	tall: '',
+	weight: '',
+	usual_weight: '',
 	more_than_6_months: 0,
 	loss_weight: '00,00',
 	loss_weight_percent: 0,
