@@ -3,6 +3,8 @@ import Link from 'next/link'
 
 import LinkToPdf from './LinkToPdf'
 import CreatePDF from './CreatePdf'
+import RecommendationsY from './RecommendationsY'
+import RecommendationsN from './RecommendationsN'
 
 export default function ResultsPage({props}){
 
@@ -16,42 +18,18 @@ export default function ResultsPage({props}){
 
 			<div className="text-center">Sospecha de desnutrición:</div>
 
-			<div className="bg-brand-dark border-b-4 border-brand-aqua text-white text-3xl font-bold text-center leading-none pt-3 pb-2 mt-3">{ diagnosis }</div>
+			<div className="bg-brand-dark border-b-4 border-brand-aqua text-white text-3xl font-bold text-center leading-none pt-3 pb-2 mt-3 select-none">{ diagnosis }</div>
 
 			<div className="bg-brand-aqua-600 w-24 h-1 mx-auto mt-10"></div>
 			<div className="page-title text-brand-aqua-600 text-center mt-4">CRITERIOS GLIM</div>
 
 			<div className="mt-4">El diagnóstico de desnutrición de su paciente mediante los criterios GLIM es:</div>
-			<div className="bg-brand-aqua border-b-4 border-brand-dark text-brand-dark text-3xl font-bold text-center leading-none pt-3 pb-2 mt-3">{props.diagnosis}</div>
+			<div className="bg-brand-aqua bg-opacity-90 border-b-4 border-brand-dark text-brand-dark text-3xl font-bold text-center leading-none pt-3 pb-2 mt-3 select-none">{props.diagnosis}</div>
 
 
-			<div className="text-center py-4 max-w-xs mx-auto md:pt-16 md:pb-10">
-				<div className="page-title">RECOMENDACIONES</div>
-			</div>
-
-			<div className="text-center">Realice seguimiento nutricional del paciente:</div>
-
-			<div className="leading-tight space-y-6 mt-6">
-				<div className="flex gap-x-4">
-					<div className=""></div>
-					<div className="pl-4 relative">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-brand-dark w-2 left-0 top-2 absolute">
-							<path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"></path>
-						</svg>
-						<p>Es posible que su paciente necesite un tratamiento nutricional basándonos en las guías ESPEN/ESMO para pacientes con cáncer.</p>
-					</div>
-				</div>
-
-				<div className="flex gap-x-4">
-					<div className=""></div>
-					<div className="pl-4 relative">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-brand-dark w-2 left-0 top-2 absolute">
-							<path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"></path>
-						</svg>
-						<p>A continuación, desde Abbott Nutrition le facilitamos un algoritmo de decisión de nutrición enteral en paciente oncológico, donde podrá igualmente valorar los suplementos nutricionales valorar los suplementos nutricionales que mejor respondan a las necesidades de su paciente.</p>
-					</div>
-				</div>
-			</div>
+			<div className="page-title text-center mt-7">RECOMENDACIONES</div>
+			{ props.diagnosis === 'SÍ' ? <RecommendationsY /> : <RecommendationsN /> }
+			{ props.diagnosis === 'SÍ' ? <div className="mt-8 flex flex-col gap-4"><LinkToPdf /></div> : null }
 
 			<div className="bg-brand-aqua-600 w-24 h-1 mx-auto mt-10"></div>
 			<div className="page-title text-brand-aqua-600 text-center mt-4">DATOS ANTROPOMÉTRICOS</div>
@@ -71,7 +49,7 @@ export default function ResultsPage({props}){
 		</section>
 
 
-		<div className="bg-brand-dark bg-opacity-20 leading-tight px-6 pt-5 pb-24 -mx-6 -mb-24 mt-8">
+		<div className="bg-brand-dark bg-opacity-20 leading-tight px-6 pt-5 pb-20 -mx-6 -mb-24 mt-8">
 			<div className="max-w-md mx-auto ">
 				<p className="">
 					<span className="underline">Una vez que cierre o reinicie</span> este formulario, 
