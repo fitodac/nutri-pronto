@@ -91,6 +91,26 @@ export default function GlimPage(){
 
 	useEffect(() => {
 		setForm(calculator(form))
+
+		gsap.set('#pageTitle', { top: 60, position: 'relative', opacity: 0 })
+		gsap.set('#introText', { top: 60, position: 'relative', opacity: 0 })
+		gsap.set('#section1', { top: 60, position: 'relative', opacity: 0 })
+		gsap.set('#section2', { top: 60, position: 'relative', opacity: 0 })
+		gsap.set('#section3', { top: 60, position: 'relative', opacity: 0 })
+		gsap.set('#section4', { top: 60, position: 'relative', opacity: 0 })
+		gsap.set('#section5', { top: 60, position: 'relative', opacity: 0 })
+		gsap.set('#section6', { top: 60, position: 'relative', opacity: 0 })
+		gsap.set('#nextButton', { top: 60, position: 'relative', opacity: 0 })
+
+		gsap.to('#pageTitle', { top: 0, opacity: 1 })
+		gsap.to('#introText', { top: 0, opacity: 1, delay: .1 })
+		gsap.to('#section1', { top: 0, opacity: 1, delay: .2 })
+		gsap.to('#section2', { top: 0, opacity: 1, delay: .3 })
+		gsap.to('#section3', { top: 0, opacity: 1, delay: .4 })
+		gsap.to('#section4', { top: 0, opacity: 1, delay: .5 })
+		gsap.to('#section5', { top: 0, opacity: 1, delay: .6 })
+		gsap.to('#section6', { top: 0, opacity: 1, delay: .7 })
+		gsap.to('#nextButton', { top: 0, opacity: 1, delay: .8 })
 	}, [])
 
 	useEffect(() => setForm(calculator(form)), [form.tall, form.weight, form.usual_weight, form.more_than_6_months, form.age])
@@ -157,12 +177,49 @@ export default function GlimPage(){
 	}
 
 	const validateStep1 = () => {
-		console.log('validate')
 		if( !form.tall.length || !form.weight.length || !form.usual_weight.length ){
 			showError()
 			return
 		}
+
 		setStep(2)
+
+		setTimeout(() => {
+			window.scrollTo({ top: 0, behavior: 'smooth' })
+
+			gsap.set('#pageTitle2', { top: 60, position: 'relative', opacity: 0 })
+			gsap.set('#introText2', { top: 60, position: 'relative', opacity: 0 })
+			gsap.set('#bar1', { top: 60, position: 'relative', opacity: 0 })
+			gsap.set('#title1', { top: 60, position: 'relative', opacity: 0 })
+			gsap.set('#text1', { top: 60, position: 'relative', opacity: 0 })
+			gsap.set('#section7', { top: 60, position: 'relative', opacity: 0 })
+			gsap.set('#section8', { top: 60, position: 'relative', opacity: 0 })
+			gsap.set('#section9', { top: 60, position: 'relative', opacity: 0 })
+			gsap.set('#section10', { top: 60, position: 'relative', opacity: 0 })
+			gsap.set('#bar2', { top: 60, position: 'relative', opacity: 0 })
+			gsap.set('#title2', { top: 60, position: 'relative', opacity: 0 })
+			gsap.set('#text2', { top: 60, position: 'relative', opacity: 0 })
+			gsap.set('#section11', { top: 60, position: 'relative', opacity: 0 })
+			gsap.set('#section12', { top: 60, position: 'relative', opacity: 0 })
+			gsap.set('#submitButton', { top: 60, position: 'relative', opacity: 0 })
+
+			gsap.to('#section2', { opacity: 1, delay: .1 })
+			gsap.to('#pageTitle2', { top: 0, opacity: 1, delay: .2 })
+			gsap.to('#introText2', { top: 0, opacity: 1, delay: .3 })
+			gsap.to('#bar1', { top: 0, opacity: 1, delay: .4 })
+			gsap.to('#title1', { top: 0, opacity: 1, delay: .5 })
+			gsap.to('#text1', { top: 0, opacity: 1, delay: .6 })
+			gsap.to('#section7', { top: 0, opacity: 1, delay: .7 })
+			gsap.to('#section8', { top: 0, opacity: 1, delay: .8 })
+			gsap.to('#section9', { top: 0, opacity: 1, delay: .9 })
+			gsap.to('#section10', { top: 0, opacity: 1, delay: 1 })
+			gsap.to('#title2', { top: 0, opacity: 1, delay: 1.1 })
+			gsap.to('#bar2', { top: 0, opacity: 1, delay: 1.2 })
+			gsap.to('#text2', { top: 0, opacity: 1, delay: 1.3 })
+			gsap.to('#section11', { top: 0, opacity: 1, delay: 1.4 })
+			gsap.to('#section12', { top: 0, opacity: 1, delay: 1.5 })
+			gsap.to('#submitButton', { top: 0, opacity: 1, delay: 1.6 })
+		}, 100)
 	}
 
 
@@ -176,9 +233,8 @@ export default function GlimPage(){
 
 		( 'No aplica' === form.reduced_dietary_intake && 'No aplica' == form.inflammation ) ? setDiagnosis('NO') : setDiagnosis('SÍ')
 		setBreadcrumb('result')
+		window.scrollTo({ top: 0, behavior: 'smooth' })
 		setSent(true)
-
-		console.log('FORM:', form)
 	}
 
 
@@ -189,13 +245,13 @@ export default function GlimPage(){
 				{ step === 1 ? 
 					(<>
 						<div className="text-center py-8 md:pt-16 md:pb-10">
-							<div id="pageTitle" className="page-title">DATOS ANTROPOMÉTRICOS</div>
+							<div id="pageTitle" className="page-title opacity-0">DATOS ANTROPOMÉTRICOS</div>
 						</div>
 
 						<section className="space-y-3 max-w-md mx-auto">
-							<div className="text-center">Por favor, indique los siguientes datos de su paciente:</div>
+							<div id="introText" className="text-center opacity-0">Por favor, indique los siguientes datos de su paciente:</div>
 
-							<label className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center">
+							<label id="section1" className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center opacity-0">
 								<span className="pl-4 py-2 w-40">Talla (m):</span>
 								<input 
 									type="text" 
@@ -205,7 +261,7 @@ export default function GlimPage(){
 									defaultValue={form.tall} />
 							</label>
 
-							<label className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center">
+							<label id="section2" className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center opacity-0">
 								<span className="pl-4 py-2 w-40">Peso actual (kg):</span>
 								<input 
 									type="text" 
@@ -215,7 +271,7 @@ export default function GlimPage(){
 									defaultValue={form.weight} />
 							</label>
 
-							<label className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center">
+							<label id="section3" className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center opacity-0">
 								<span className="pl-4 py-2 w-40">Peso habitual (kg):</span>
 								<input 
 									type="text" 
@@ -227,12 +283,12 @@ export default function GlimPage(){
 
 						</section>
 
-						<section className="mt-8 space-y-2 max-w-md mx-auto">
+						<section id="section4" className="mt-8 space-y-2 max-w-md mx-auto opacity-0">
 							<div className="text-center">Cálculo peso perdido (kg):</div>
 							<div className="bg-brand-aqua border-b-4 border-brand-dark text-2xl font-semibold text-center p-2">{form.loss_weight} kg</div>
 						</section>
 
-						<div className="mt-4 flex gap-x-8 max-w-md mx-auto">
+						<div id="section5" className="mt-4 flex gap-x-8 max-w-md mx-auto opacity-0">
 							<button 
 								className={`${form.more_than_6_months ? 'bg-white' : 'bg-gray-300'} border border-gray-300 p-2 flex-1`}
 								onClick={() => setTimeFrame(0)}>
@@ -245,7 +301,7 @@ export default function GlimPage(){
 							</button>
 						</div>
 
-						<section className="mt-8 space-y-2 max-w-md mx-auto">
+						<section id="section6" className="mt-8 space-y-2 max-w-md mx-auto opacity-0">
 							<div className="text-center">Cálculo de IMC actual (kg/m<sup className="text-xxs">2</sup>):</div>
 							<div className="bg-brand-aqua border-b-4 border-brand-dark text-2xl font-semibold text-center p-2">{form.imc} kg/m<sup className="text-xs">2</sup></div>
 						</section>
@@ -260,33 +316,33 @@ export default function GlimPage(){
 						</div>
 					</>)
 					:
-					(<>
+					(<div id="section2" className="opacity-0">
 						<div className="text-center pt-8 pb-6 max-w-xs mx-auto md:pt-16 md:pb-10">
-							<div className="page-title">CRITERIOS GLIM PARA EL DIAGNÓSTICO DE DESNUTRICIÓN*</div>
+							<div id="pageTitle2" className="page-title opacity-0">CRITERIOS GLIM PARA EL DIAGNÓSTICO DE DESNUTRICIÓN*</div>
 						</div>
 
-						<div className="text-center max-w-md mx-auto">*Diagnóstico de desnutrición: requiere al menos <br/>1 criterio fenotípico y 1 criterio etiológico.</div>
+						<div id="introText2" className="text-center max-w-md mx-auto">*Diagnóstico de desnutrición: requiere al menos <br/>1 criterio fenotípico y 1 criterio etiológico.</div>
 
 						<fieldset className="max-w-md mx-auto">
 							<legend className="text-center">
-								<div className="bg-brand-aqua-600 w-24 h-1 mx-auto mt-10"></div>
-								<div className="page-title text-brand-aqua-600 mt-5">CRITERIO FENOTÍPICO</div>
+								<div id="bar1" className="bg-brand-aqua-600 w-24 h-1 mx-auto mt-10"></div>
+								<div id="title1" className="page-title text-brand-aqua-600 mt-5">CRITERIO FENOTÍPICO</div>
 							</legend>
 
 							<section className="mt-7 space-y-6">
-								<div className="text-brand-aqua-600 font-medium leading-tight">Por favor, responda las siguientes preguntas sobre su paciente:</div>
+								<div id="text1" className="text-brand-aqua-600 font-medium leading-tight">Por favor, responda las siguientes preguntas sobre su paciente:</div>
 
-								<div className="space-y-2">
+								<div id="section7" className="space-y-2">
 									<div className="">Pérdida de peso (%):</div>
 									<div className="bg-brand-aqua font-medium px-3 py-1.5">{form.loss_weight_info}</div>
 								</div>
 
-								<div className="space-y-2">
+								<div id="section8" className="space-y-2">
 									<div className="">Bajo IMC (kg/m<sup className="text-xxs">2</sup>):</div>
 									<div className="bg-brand-aqua font-medium px-3 py-1.5">{form.low_imc} &lt; 20 en &lt; 70 años</div>
 								</div>
 
-								<div className="space-y-2">
+								<div id="section9" className="space-y-2">
 									<div className="">Masa muscular reducida:</div>
 									<select 
 										name="muscle_mass" 
@@ -299,7 +355,7 @@ export default function GlimPage(){
 									</select>
 								</div>
 
-								<div className="mt-4 flex gap-x-8 max-w-md mx-auto">
+								<div id="section10" className="mt-4 flex gap-x-8 max-w-md mx-auto">
 									<button 
 										className={`${form.age ? 'bg-white' : 'bg-gray-300'} border border-gray-300 p-2 flex-1`}
 										onClick={() => setAge(0)}>
@@ -317,14 +373,14 @@ export default function GlimPage(){
 
 						<fieldset className="max-w-md mx-auto">
 							<legend className="text-center pt-5">
-								<div className="bg-brand-aqua-600 w-24 h-1 mx-auto mt-10"></div>
-								<div className="page-title text-brand-aqua-600 mt-5">CRITERIO ETIOLÓGICO</div>
+								<div id="bar2" className="bg-brand-aqua-600 w-24 h-1 mx-auto mt-10"></div>
+								<div id="title2" className="page-title text-brand-aqua-600 mt-5">CRITERIO ETIOLÓGICO</div>
 							</legend>
 
 							<section className="mt-7 space-y-6">
-								<div className="text-brand-aqua-600 font-medium leading-tight">Por favor, responda las siguientes preguntas sobre su paciente:</div>
+								<div id="text2" className="text-brand-aqua-600 font-medium leading-tight">Por favor, responda las siguientes preguntas sobre su paciente:</div>
 
-								<div className="space-y-2">
+								<div id="section11" className="space-y-2">
 									<div className="">Reducción de la ingesta o asimilación de alimentos:</div>
 									<select 
 										name="reduced_dietary_intake" 
@@ -338,7 +394,7 @@ export default function GlimPage(){
 									</select>
 								</div>
 
-								<div className="space-y-2">
+								<div id="section12" className="space-y-2">
 									<div className="">Inflamación:</div>
 									<select 
 										name="inflammation" 
@@ -356,7 +412,7 @@ export default function GlimPage(){
 						<div id="submitButton" className="pt-14 flex justify-center">
 							<button className="bg-brand-aqua text-white font-bold px-9 py-2.5 transition-all hover:opacity-80">CONTINUAR</button>
 						</div>
-					</>)
+					</div>)
 				}
 			</form>)
 			
