@@ -7,7 +7,7 @@ export default function Header(){
 
 			<div className="">
 				<Image
-					className="w-16 md:w-32"
+					className="w-16 md:w-40"
 					src="/abbott.svg"
 					alt="Abbott"
 					width={474}
@@ -18,7 +18,7 @@ export default function Header(){
 			<div className="">
 				<Link href="/">
 					<Image
-						className="w-40 md:w-[270px]"
+						className="w-40 md:w-[350px]"
 						src="/logo.svg"
 						alt="Nutri Pronto - Nutrition for oncology patients"
 						width={1241}

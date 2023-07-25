@@ -101,18 +101,18 @@ export default function ProntoPage(){
 
 	return (<Layout status={breadcrumb}>
 		{ !sent ? 
-			(<div className="max-w-md mx-auto">
+			(<div className="max-w-md mx-auto lg:max-w-full">
 				<div className="text-center py-8 md:pt-16 md:pb-10">
 					<div id="pageTitle" className="page-title">CUESTIONARIO PRONTO</div>
 				</div>
 
-				<div id="introText" className="text-brand-aqua-600 font-medium">Por favor, responda las siguientes preguntas sobre su paciente:</div>
+				<div id="introText" className="text-brand-aqua-600 font-medium lg:text-xl lg:font-semibold">Por favor, responda las siguientes preguntas sobre su paciente:</div>
 
 				<form className="mt-6" onSubmit={submit}>
 					
-					<div className="space-y-10">
+					<div className="space-y-10 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-10">
 						<section id="section1" className="space-y-3">
-							<div className="">
+							<div className="lg:text-xl lg:font-semibold lg:leading-tight">
 								<span className="font-semibold pr-1">1.</span>
 								<span className="">¿Ha perdido peso involuntariamente (5% a 10% o más) en los últimos 3-6 meses/ desde nuestra última consulta?</span>
 							</div>
@@ -137,7 +137,7 @@ export default function ProntoPage(){
 
 
 						<section id="section2" className="space-y-3">
-							<div className="">
+							<div className="lg:text-xl lg:font-semibold lg:leading-tight">
 								<span className="font-semibold pr-1">2.</span>
 								<span className="">¿Ha estado comiendo menos de lo habitual en la última semana/ desde nuestra última consulta?</span>
 							</div>
@@ -162,7 +162,7 @@ export default function ProntoPage(){
 
 
 						<section id="section3" className="space-y-3">
-							<div className="">
+							<div className="lg:text-xl lg:font-semibold lg:leading-tight">
 								<span className="font-semibold pr-1">3.</span>
 								<span className="">¿Ha perdido fuerza o se siente más débil que lo usual desde nuestra última consulta?</span>
 							</div>
@@ -187,7 +187,7 @@ export default function ProntoPage(){
 
 
 					<div id="submitButton" className="pt-14 flex justify-center">
-						<button className="bg-brand-aqua text-white font-bold px-9 py-2.5 transition-all hover:opacity-80">CONTINUAR</button>
+						<button className="bg-brand-aqua text-white font-bold px-9 py-2.5 transition-all hover:opacity-80 lg:text-2xl lg:tracking-tight lg:px-11">CONTINUAR</button>
 					</div>
 
 				</form>

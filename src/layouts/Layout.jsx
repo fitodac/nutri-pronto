@@ -30,8 +30,8 @@ export default function Layout({status, children}){
 			</div>
 		</div>
 
-		<section className="max-w-3xl px-6 mx-auto 3xl:px-0">{children}</section>
+		<section className="max-w-3xl px-6 mx-auto md:max-w-5xl 3xl:px-0">{children}</section>
 
-		<div id="mainFooter" className="text-xxs text-center pb-8 pt-10 select-none">{ process.env.FOOTER_CODE }</div>
+		<div id="mainFooter" className="text-xxs text-center pb-8 pt-10 select-none lg:text-sm">{ process.env.FOOTER_CODE }</div>
 	</main>)
 }

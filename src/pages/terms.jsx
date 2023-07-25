@@ -1,7 +1,7 @@
 import Layout from '../layouts/Layout'
 import Link from 'next/link'
 
-const section_title = 'font-medium'
+const section_title = 'font-medium md:font-semibold'
 
 export default function TermsPage(){
 	return (<Layout>

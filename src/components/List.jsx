@@ -20,7 +20,7 @@ export default function List(props){
 
 	return (<div className="select-none mt-4">
 		<div 
-			className="bg-brand-aqua bg-opacity-20 text-brand-aqua-600 text-sm pl-3 pr-1 py-1 flex justify-between items-center cursor-pointer transition-all hover:bg-opacity-30"
+			className="bg-brand-aqua bg-opacity-20 text-brand-aqua-600 text-sm pl-3 pr-1 py-1 flex justify-between items-center cursor-pointer transition-all hover:bg-opacity-30 md:font-medium"
 			onClick={toggler}>
 			<span className="">PREGUNTAS EXPLORATORIAS</span>
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-7" fill="currentColor">
@@ -30,7 +30,11 @@ export default function List(props){
 
 		<ul id={`list-${props.id}`} className="h-0 opacity-0 overflow-hidden">
 			{ props.list.map(li => {
-				return (<li className="border-brand-aqua border-opacity-30 leading-tight font-light px-3 py-2 [&:not(:first-child)]:border-t [&:not(:first-child)]:border-dashed" key={Math.random().toString(16).substring(2)}>
+				return (<li 
+									className="border-brand-aqua border-opacity-30 leading-tight font-light px-3 py-2 
+															[&:not(:first-child)]:border-t [&:not(:first-child)]:border-dashed
+															md:text-lg md:font-medium md:leading-tight
+															md:[&:not(:first-child)]:border-t-2 md:[&:not(:first-child)]:border-dotted" key={Math.random().toString(16).substring(2)}>
 					{ li.map(e => { return (<p key={Math.random().toString(16).substring(2)}>{e}</p>)}) }
 				</li>)
 			}) }

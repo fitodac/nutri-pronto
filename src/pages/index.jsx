@@ -32,12 +32,12 @@ export default function HomePage(){
 			
 			<div 
 				id="stripe1"
-				className="stripe-right h-20 -top-5 relative opacity-0"></div>
+				className="stripe-right h-20 -top-5 relative opacity-0 md:h-36"></div>
 			
 			<div className="flex justify-center max-w-3xl px-6 pt-14 mx-auto">
 				<Image
 					id="logo"
-					className="w-full max-w-xs mx-auto scale-125 opacity-0 md:max-w-[500px]"
+					className="w-full max-w-xs mx-auto scale-125 opacity-0 pointer-events-none select-none md:max-w-full"
 					src="/brand.svg"
 					alt="Nutri Pronto - Nutrition for oncology patients"
 					width={1241}
@@ -47,27 +47,32 @@ export default function HomePage(){
 
 			<div 
 				id="intro" 
-				className="font-light leading-none text-center max-w-3xl px-10 py-10 mx-auto -mt-36 opacity-0 select-none md:text-xl md:leading-tight md:pt-20 3xl:px-0">
+				className="font-light leading-none text-center max-w-3xl px-10 py-10 mx-auto -mt-36 opacity-0 select-none 
+										md:text-3xl md:font-medium md:leading-tight md:max-w-4xl md:pt-20 3xl:px-0">
 				<p className="">Es una nueva herramienta de cribado nutricional aplicado al paciente oncológico<sup className="text-xxs">1</sup> que permite al especialista identificar la desnutrición de manera ágil y fácil, así como poner en marcha las intervenciones nutricionales que puedan ser más adecuadas.</p>
 			</div>
 
 			<div id="termsConditionsLink" className="flex justify-center max-w-3xl mx-auto opacity-0">
-				<Link href="/terms" className="text-brand-aqua text-sm underline select-none md:text-xl md:leading-tight">Términos y condiciones</Link>
+				<Link 
+					href="/terms" 
+					className="text-brand-aqua text-sm underline select-none 
+											md:text-3xl md:leading-tight md:font-medium">Términos y condiciones</Link>
 			</div>
 
 			<div 
 				id="stripe2"
-				className="stripe-left h-28 mt-8 grid place-content-center top-5 relative opacity-0">
+				className="stripe-left h-28 mt-8 grid place-content-center top-5 relative opacity-0 md:h-44">
 				<Link 
 					id="link"
 					href="/start" 
-					className="text-brand-dark transition-all opacity-0 pointer-events-none hover:text-white md:text-2xl">EMPEZAR</Link>
+					className="text-brand-dark transition-all opacity-0 pointer-events-none hover:text-white 
+											md:text-3xl md:font-medium">EMPEZAR</Link>
 			</div>
 
 			<div className="flex justify-center pt-10 pb-6">
 				<Image
 					id="abbot"
-					className="w-32 opacity-0"
+					className="w-32 opacity-0 pointer-events-none select-none md:w-56"
 					src="/abbott.svg"
 					alt="Abbott"
 					width={474}
@@ -77,7 +82,7 @@ export default function HomePage(){
 			
 			<div 
 				id="footer"
-				className="text-xxs text-center mt-4 select-none opacity-0 md:mt-0">
+				className="text-xxs text-center mt-4 select-none opacity-0 md:mt-0 lg:text-sm">
 				{ process.env.FOOTER_CODE }
 			</div>
 		</section>

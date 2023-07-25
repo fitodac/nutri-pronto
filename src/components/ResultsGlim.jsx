@@ -92,8 +92,8 @@ export default function ResultsPage({props}){
 
 
 		<div className="bg-brand-dark bg-opacity-20 leading-tight px-6 pt-5 pb-20 -mx-6 -mb-24 mt-8">
-			<div className="max-w-md mx-auto ">
-				<p className="">
+			<div className="max-w-md mx-auto lg:max-w-2xl">
+				<p className="lg:text-xl lg:leading-tight">
 					<span className="underline">Una vez que cierre o reinicie</span> este formulario, 
 					todos <span className="underline">los datos introducidos serán borrados permanentemente</span>. 
 					Abbott no tiene acceso en ningún momento a los datos introducidos.
@@ -102,7 +102,7 @@ export default function ResultsPage({props}){
 				<div className="w-full mt-6 flex flex-col items-center gap-4">
 					<Link 
 						href="/pronto"
-						className="bg-brand-dark text-white font-bold leading-none text-center w-full max-w-xs p-3 select-none transition-all hover:opacity-90">
+						className="bg-brand-dark text-white font-bold leading-none text-center w-full max-w-xs p-3 select-none transition-all hover:opacity-90 lg:text-xl">
 						NUEVA VALORACIÓN
 					</Link>
 
