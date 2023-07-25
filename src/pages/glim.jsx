@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import gsap from 'gsap'
-import Link from 'next/link'
 
 import Layout from '../layouts/Layout'
 import Results from '../components/ResultsGlim'
