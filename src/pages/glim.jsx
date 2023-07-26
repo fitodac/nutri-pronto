@@ -8,12 +8,12 @@ const form_value = {
 	tall: '',
 	weight: '',
 	usual_weight: '',
-	more_than_6_months: 0,
+	more_than_6_months: null,
 	loss_weight: '00,00',
 	loss_weight_percent: 0,
 	imc: '00,00',
 
-	age: 0,
+	age: null,
 	muscle_mass: '',
 	reduced_dietary_intake: '',
 	inflammation: '',
@@ -98,6 +98,7 @@ export default function GlimPage(){
 		gsap.set('#section4', 	{ top: 60, position: 'relative', opacity: 0 })
 		gsap.set('#section5', 	{ top: 60, position: 'relative', opacity: 0 })
 		gsap.set('#section6', 	{ top: 60, position: 'relative', opacity: 0 })
+		gsap.set('#section10', 	{ top: 60, position: 'relative', opacity: 0 })
 		gsap.set('#nextButton', { top: 60, position: 'relative', opacity: 0 })
 
 		gsap.to('#pageTitle', 	{ top: 0, opacity: 1 })
@@ -108,7 +109,8 @@ export default function GlimPage(){
 		gsap.to('#section4', 		{ top: 0, opacity: 1, delay: .5 })
 		gsap.to('#section5', 		{ top: 0, opacity: 1, delay: .6 })
 		gsap.to('#section6', 		{ top: 0, opacity: 1, delay: .7 })
-		gsap.to('#nextButton', 	{ top: 0, opacity: 1, delay: .8 })
+		gsap.to('#section10', 	{ top: 0, opacity: 1, delay: .8 })
+		gsap.to('#nextButton', 	{ top: 0, opacity: 1, delay: .9 })
 	}, [])
 
 	useEffect(() => setForm(calculator(form)), [form.tall, form.weight, form.usual_weight, form.more_than_6_months, form.age])
@@ -156,6 +158,17 @@ export default function GlimPage(){
 			}
 		}
 
+		// No se permite una altura mayor al valor de tall_limit
+		const tall_limit = 2.5
+
+		if( e.target.name === 'tall' ){
+			const tall = e.target.value.indexOf(',') ? Number(e.target.value.replace(',', '.')) : Number(e.target.value)
+			if( tall > tall_limit ){
+				f.tall = '2,5'
+				e.target.value = '2,5'
+			}
+		}
+
 		setForm(f)
 	}
 
@@ -182,7 +195,13 @@ export default function GlimPage(){
 	}
 
 	const validateStep1 = () => {
-		if( !form.tall.length || !form.weight.length || !form.usual_weight.length ){
+		if( 
+			!form.tall.length 
+			|| !form.weight.length 
+			|| !form.usual_weight.length 
+			|| null === form.more_than_6_months 
+			|| null === form.age 
+		){
 			showError()
 			return
 		}
@@ -200,7 +219,6 @@ export default function GlimPage(){
 			gsap.set('#section7', 			{ top: 60, position: 'relative', opacity: 0 })
 			gsap.set('#section8', 			{ top: 60, position: 'relative', opacity: 0 })
 			gsap.set('#section9', 			{ top: 60, position: 'relative', opacity: 0 })
-			gsap.set('#section10', 			{ top: 60, position: 'relative', opacity: 0 })
 			gsap.set('#bar2', 					{ top: 60, position: 'relative', opacity: 0 })
 			gsap.set('#title2', 				{ top: 60, position: 'relative', opacity: 0 })
 			gsap.set('#text2', 					{ top: 60, position: 'relative', opacity: 0 })
@@ -217,7 +235,6 @@ export default function GlimPage(){
 			gsap.to('#section7', 				{ top: 0, opacity: 1, delay: .7 })
 			gsap.to('#section8', 				{ top: 0, opacity: 1, delay: .8 })
 			gsap.to('#section9', 				{ top: 0, opacity: 1, delay: .9 })
-			gsap.to('#section10', 			{ top: 0, opacity: 1, delay: 1 })
 			gsap.to('#title2', 					{ top: 0, opacity: 1, delay: 1.1 })
 			gsap.to('#bar2', 						{ top: 0, opacity: 1, delay: 1.2 })
 			gsap.to('#text2', 					{ top: 0, opacity: 1, delay: 1.3 })
@@ -307,17 +324,37 @@ export default function GlimPage(){
 
 							<div 
 								id="section5" 
-								className="mt-4 flex gap-x-8 max-w-md mx-auto opacity-0 lg:order-3 lg:w-full">
+								className="pt-8 flex gap-x-8 max-w-md mx-auto opacity-0 lg:order-3 lg:w-full lg:items-end">
 								<button 
-									className={`${form.more_than_6_months ? 'bg-white' : 'bg-gray-300'} border border-gray-300 p-2 flex-1 select-none lg:text-xl lg:font-medium`}
+									type="button"
+									className={`${form.more_than_6_months === 0 ? 'bg-white' : 'bg-gray-300'} border border-gray-300 p-2 flex-1 select-none lg:text-xl lg:font-medium lg:h-11`}
 									onClick={() => setTimeFrame(0)}>
 									&lt; 6 MESES
 								</button>
 								<button 
-									className={`${form.more_than_6_months ? 'bg-gray-300' : 'bg-white'} border border-stone-300 p-2 flex-1 select-none lg:text-xl lg:font-medium`}
+									type="button"
+									className={`${form.more_than_6_months === 1 ? 'bg-white' : 'bg-gray-300'} border border-stone-300 p-2 flex-1 select-none lg:text-xl lg:font-medium lg:h-11`}
 									onClick={() => setTimeFrame(1)}>
 									&gt; 6 MESES
 								</button>
+							</div>
+
+							<div id="section10" className="pt-8 max-w-md mx-auto lg:order-4 lg:w-full">
+								<div className="text-center lg:text-xl lg:text-left lg:font-medium">Edad:</div>
+								<div className="flex gap-x-8 mt-3">
+									<button 
+										type="button"
+										className={`${form.age === 0 ? 'bg-white' : 'bg-gray-300'} border border-gray-300 p-2 flex-1 select-none lg:text-xl lg:font-medium lg:h-11`}
+										onClick={() => setAge(0)}>
+										&lt; 70 AÑOS
+									</button>
+									<button 
+										type="button"
+										className={`${form.age === 1 ? 'bg-white' : 'bg-gray-300'} border border-stone-300 p-2 flex-1 select-none lg:text-xl lg:font-medium lg:h-11`}
+										onClick={() => setAge(1)}>
+										&gt; 70 AÑOS
+									</button>
+								</div>
 							</div>
 
 							<section 
@@ -376,20 +413,6 @@ export default function GlimPage(){
 											<option value="Déficit severo">Déficit severo</option>
 											<option value="No aplica">No aplica</option>
 										</select>
-									</div>
-
-
-									<div id="section10" className="mt-4 flex gap-x-8 max-w-md mx-auto lg:w-full lg:pt-9">
-										<button 
-											className={`${form.age ? 'bg-white' : 'bg-gray-300'} border border-gray-300 p-2 flex-1 select-none lg:text-xl lg:font-medium`}
-											onClick={() => setAge(0)}>
-											&lt; 70 AÑOS
-										</button>
-										<button 
-											className={`${form.age ? 'bg-gray-300' : 'bg-white'} border border-stone-300 p-2 flex-1 select-none lg:text-xl lg:font-medium`}
-											onClick={() => setAge(1)}>
-											&gt; 70 AÑOS
-										</button>
 									</div>
 								</div>
 							</section>
