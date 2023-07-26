@@ -87,7 +87,7 @@ export default function ProntoPage(){
 				})
 			}, 100)
 		}else{
-			if( form.option1 === 1 && form.option2 === 1 && form.option3 === 1 ){ 
+			if( form.option1 === 1 || form.option2 === 1 || form.option3 === 1 ){ 
 				sessionStorage.setItem('nutripronto_result', 'SÍ')
 			}else{ 
 				sessionStorage.setItem('nutripronto_result', 'NO')
