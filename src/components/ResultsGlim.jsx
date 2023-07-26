@@ -99,7 +99,7 @@ export default function ResultsPage({props}){
 					Abbott no tiene acceso en ningún momento a los datos introducidos.
 				</p>
 
-				<div className="w-full mt-6 flex flex-col items-center gap-4">
+				<div className="w-full mt-6 flex flex-col items-center gap-4 lg:flex-row">
 					<Link 
 						href="/pronto"
 						className="bg-brand-dark text-white font-bold leading-none text-center w-full max-w-xs p-3 select-none transition-all hover:opacity-90 lg:text-xl">
