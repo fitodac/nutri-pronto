@@ -5,25 +5,25 @@ import Layout from '../layouts/Layout'
 import Results from '../components/ResultsGlim'
 
 const form_value = {
-	tall: '',
-	weight: '',
-	usual_weight: '',
+	// tall: '',
+	// weight: '',
+	// usual_weight: '',
 	more_than_6_months: null,
 	loss_weight: '00,00',
 	loss_weight_percent: 0,
 	imc: '00,00',
 
 	age: null,
-	muscle_mass: '',
-	reduced_dietary_intake: '',
-	inflammation: '',
+	// muscle_mass: '',
+	// reduced_dietary_intake: '',
+	// inflammation: '',
 	
-	// tall: '1,55',
-	// weight: '50',
-	// usual_weight: '58,3',
-	// muscle_mass: 'Déficit leve a moderado',
-	// reduced_dietary_intake: '&lt;50% de las necesidades energéticas &gt;1 semana',
-	// inflammation: 'Relacionada a enfermedad/lesión aguda',
+	tall: '1,55',
+	weight: '50',
+	usual_weight: '58,3',
+	muscle_mass: 'Déficit leve a moderado',
+	reduced_dietary_intake: '&lt;50% de las necesidades energéticas &gt;1 semana',
+	inflammation: 'Relacionada a enfermedad/lesión aguda',
 	
 	// reduced_dietary_intake: 'No aplica',
 	// inflammation: 'No aplica',
@@ -283,30 +283,30 @@ export default function GlimPage(){
 								<label 
 									id="section1" 
 									className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center opacity-0">
-									<span className="pl-4 py-2 w-40 select-none whitespace-nowrap lg:font-medium">Talla (m):</span>
+									<span className="pl-4 py-2 w-1/2 select-none whitespace-nowrap lg:font-medium">Talla (m):</span>
 									<input 
 										type="text" 
-										className="bg-transparent text-right flex-1 px-4 py-2 focus:outline-none lg:w-full lg:py-3"
+										className="bg-transparent text-right flex-1 w-1/2 px-4 py-2 focus:outline-none lg:w-full lg:py-3"
 										name="tall"
 										onChange={handleChange}
 										defaultValue={form.tall} />
 								</label>
 
 								<label id="section2" className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center opacity-0">
-									<span className="pl-4 py-2 w-40 select-none whitespace-nowrap lg:font-medium">Peso actual (kg):</span>
+									<span className="pl-4 py-2 w-1/2 select-none whitespace-nowrap lg:font-medium">Peso actual (kg):</span>
 									<input 
 										type="text" 
-										className="bg-transparent text-right flex-1 px-4 py-2 focus:outline-none lg:w-full lg:py-3"
+										className="bg-transparent text-right flex-1 w-1/2 px-4 py-2 focus:outline-none lg:w-full lg:py-3"
 										name="weight"
 										onChange={handleChange}
 										defaultValue={form.weight} />
 								</label>
 
 								<label id="section3" className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center opacity-0">
-									<span className="pl-4 py-2 w-40 select-none whitespace-nowrap lg:font-medium">Peso habitual (kg):</span>
+									<span className="pl-4 py-2 w-1/2 select-none whitespace-nowrap lg:font-medium">Peso habitual (kg):</span>
 									<input 
 										type="text" 
-										className="bg-transparent text-right flex-1 px-4 py-2 focus:outline-none lg:w-full lg:py-3"
+										className="bg-transparent text-right flex-1 w-1/2 px-4 py-2 focus:outline-none lg:w-full lg:py-3"
 										name="usual_weight"
 										onChange={handleChange}
 										defaultValue={form.usual_weight} />
