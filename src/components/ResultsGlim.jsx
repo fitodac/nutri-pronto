@@ -130,8 +130,8 @@ export default function ResultsPage({props}){
 		doc.setFontSize(18)
 		doc.text(props.loss_weight, 100, top+60, { align: 'center' })
 
-		doc.output('dataurlnewwindow')
-		// doc.save(`pronto-${Date.now()}.pdf`)
+		// doc.output('dataurlnewwindow')
+		doc.save(`pronto-${Date.now()}.pdf`)
 	}
 
 

@@ -5,25 +5,25 @@ import Layout from '../layouts/Layout'
 import Results from '../components/ResultsGlim'
 
 const form_value = {
-	// tall: '',
-	// weight: '',
-	// usual_weight: '',
+	tall: '',
+	weight: '',
+	usual_weight: '',
 	more_than_6_months: null,
 	loss_weight: '00,00',
 	loss_weight_percent: 0,
 	imc: '00,00',
 
 	age: null,
-	// muscle_mass: '',
-	// reduced_dietary_intake: '',
-	// inflammation: '',
+	muscle_mass: '',
+	reduced_dietary_intake: '',
+	inflammation: '',
 	
-	tall: '1,55',
-	weight: '50',
-	usual_weight: '58,3',
-	muscle_mass: 'Déficit leve a moderado',
-	reduced_dietary_intake: '&lt;50% de las necesidades energéticas &gt;1 semana',
-	inflammation: 'Relacionada a enfermedad/lesión aguda',
+	// tall: '1,55',
+	// weight: '50',
+	// usual_weight: '58,3',
+	// muscle_mass: 'Déficit leve a moderado',
+	// reduced_dietary_intake: '&lt;50% de las necesidades energéticas &gt;1 semana',
+	// inflammation: 'Relacionada a enfermedad/lesión aguda',
 	
 	// reduced_dietary_intake: 'No aplica',
 	// inflammation: 'No aplica',
