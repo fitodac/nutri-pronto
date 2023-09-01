@@ -8,18 +8,18 @@ const form_value = {
 	// tall: '',
 	// weight: '',
 	// usual_weight: '',
+	// muscle_mass: '',
+	// reduced_dietary_intake: '',
+	// inflammation: '',
 	more_than_6_months: null,
 	loss_weight: '00,00',
 	loss_weight_percent: 0,
 	imc: '00,00',
 
 	age: null,
-	// muscle_mass: '',
-	// reduced_dietary_intake: '',
-	// inflammation: '',
 	
 	tall: '1,55',
-	weight: '60',
+	weight: '80',
 	usual_weight: '58,3',
 	muscle_mass: 'Déficit leve a moderado',
 	reduced_dietary_intake: '&lt;50% de las necesidades energéticas &gt;1 semana',
@@ -72,6 +72,8 @@ const calculator = form => {
 		}else{
 			if( form.age ) f.low_imc = '< 22 en > 70 años'
 		}
+	}else{
+		f.low_imc = 'No aplica'
 	}
 
 	return f
@@ -279,91 +281,107 @@ export default function GlimPage(){
 								Por favor, indique los siguientes datos de su paciente:
 							</div>
 
-							<div className="mt-3 space-y-3 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:space-y-0">
-								<label 
-									id="section1" 
-									className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center opacity-0">
-									<span className="pl-4 py-2 w-1/2 select-none whitespace-nowrap lg:font-medium">Talla (m):</span>
-									<input 
-										type="text" 
-										className="bg-transparent text-right flex-1 w-1/2 px-4 py-2 focus:outline-none lg:w-full lg:py-3"
-										name="tall"
-										onChange={handleChange}
-										defaultValue={form.tall} />
-								</label>
 
-								<label id="section2" className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center opacity-0">
-									<span className="pl-4 py-2 w-1/2 select-none whitespace-nowrap lg:font-medium">Peso actual (kg):</span>
-									<input 
-										type="text" 
-										className="bg-transparent text-right flex-1 w-1/2 px-4 py-2 focus:outline-none lg:w-full lg:py-3"
-										name="weight"
-										onChange={handleChange}
-										defaultValue={form.weight} />
-								</label>
 
-								<label id="section3" className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center opacity-0">
-									<span className="pl-4 py-2 w-1/2 select-none whitespace-nowrap lg:font-medium">Peso habitual (kg):</span>
-									<input 
-										type="text" 
-										className="bg-transparent text-right flex-1 w-1/2 px-4 py-2 focus:outline-none lg:w-full lg:py-3"
-										name="usual_weight"
-										onChange={handleChange}
-										defaultValue={form.usual_weight} />
-								</label>
+							<div className="mt-3 space-y-3 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:gap-y-6 lg:space-y-0">
+								<div className="">
+									<label 
+										id="section1" 
+										className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center opacity-0">
+										<span className="pl-4 py-2 w-1/2 select-none whitespace-nowrap lg:font-medium">Talla (m):</span>
+										<input 
+											type="text" 
+											className="bg-transparent text-right flex-1 w-1/2 px-4 py-2 focus:outline-none lg:w-full lg:py-3"
+											name="tall"
+											onChange={handleChange}
+											defaultValue={form.tall} />
+									</label>
+								</div>
+
+								<div className="">
+									<label 
+										id="section2" 
+										className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center opacity-0">
+										<span className="pl-4 py-2 w-1/2 select-none whitespace-nowrap lg:font-medium">Peso actual (kg):</span>
+										<input 
+											type="text" 
+											className="bg-transparent text-right flex-1 w-1/2 px-4 py-2 focus:outline-none lg:w-full lg:py-3"
+											name="weight"
+											onChange={handleChange}
+											defaultValue={form.weight} />
+									</label>
+								</div>
+
+								<div className="">
+									<label 
+										id="section3" 
+										className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center opacity-0">
+										<span className="pl-4 py-2 w-1/2 select-none whitespace-nowrap lg:font-medium">Peso habitual (kg):</span>
+										<input 
+											type="text" 
+											className="bg-transparent text-right flex-1 w-1/2 px-4 py-2 focus:outline-none lg:w-full lg:py-3"
+											name="usual_weight"
+											onChange={handleChange}
+											defaultValue={form.usual_weight} />
+									</label>
+								</div>
+
+								<div className="">
+									<section 
+										id="section4" 
+										className="mt-8 space-y-2 max-w-md mx-auto opacity-0 lg:mt-0 lg:col-span-1 lg:w-full lg:max-w-full">
+										<div className="text-center select-none lg:text-xl lg:text-left lg:font-medium">Cálculo peso perdido (kg):</div>
+										<div className="bg-brand-aqua border-b-4 border-brand-dark text-2xl font-semibold text-center p-2 lg:text-3xl lg:font-extrabold">{form.loss_weight} kg</div>
+									</section>
+								</div>
+
+								<div 
+									id="section5" 
+									className="pt-8 flex gap-x-8 max-w-md mx-auto opacity-0 lg:order-3 lg:w-full lg:items-end">
+									<button 
+										type="button"
+										className={`${form.more_than_6_months === 0 ? 'bg-white' : 'bg-gray-300'} border border-gray-300 p-2 flex-1 select-none lg:text-xl lg:font-medium lg:h-11`}
+										onClick={() => setTimeFrame(0)}>
+										&lt; 6 MESES
+									</button>
+									<button 
+										type="button"
+										className={`${form.more_than_6_months === 1 ? 'bg-white' : 'bg-gray-300'} border border-stone-300 p-2 flex-1 select-none lg:text-xl lg:font-medium lg:h-11`}
+										onClick={() => setTimeFrame(1)}>
+										&gt; 6 MESES
+									</button>
+								</div>
+
+
+								<div id="section10" className="pt-8 max-w-md mx-auto lg:order-4 lg:w-full">
+									<div className="text-center select-none lg:text-xl lg:text-left lg:font-medium">Edad:</div>
+									<div className="flex gap-x-8 mt-3">
+										<button 
+											type="button"
+											className={`${form.age === 0 ? 'bg-white' : 'bg-gray-300'} border border-gray-300 p-2 flex-1 select-none lg:text-xl lg:font-medium lg:h-11`}
+											onClick={() => setAge(0)}>
+											&lt; 70 AÑOS
+										</button>
+										<button 
+											type="button"
+											className={`${form.age === 1 ? 'bg-white' : 'bg-gray-300'} border border-stone-300 p-2 flex-1 select-none lg:text-xl lg:font-medium lg:h-11`}
+											onClick={() => setAge(1)}>
+											&gt; 70 AÑOS
+										</button>
+									</div>
+								</div>
+
+
+								<section 
+									id="section6" 
+									className="mt-8 space-y-2 max-w-md mx-auto opacity-0 lg:mt-0 lg:col-span-1 lg:w-full lg:max-w-full">
+									<div className="text-center select-none lg:text-xl lg:text-left lg:font-medium">Cálculo de IMC actual (kg/m<sup className="text-xxs">2</sup>):</div>
+									<div className="bg-brand-aqua border-b-4 border-brand-dark text-2xl font-semibold text-center p-2 lg:text-3xl lg:font-extrabold">{form.imc} kg/m<sup className="text-xs">2</sup></div>
+								</section>
+
 							</div>
 						</section>
 
-						<div className="lg:grid lg:grid-cols-2 lg:gap-y-3 lg:mt-10">
-							<section 
-								id="section4" 
-								className="mt-8 space-y-2 max-w-md mx-auto opacity-0 lg:mt-0 lg:col-span-1 lg:w-full">
-								<div className="text-center lg:text-xl lg:text-left lg:font-medium">Cálculo peso perdido (kg):</div>
-								<div className="bg-brand-aqua border-b-4 border-brand-dark text-2xl font-semibold text-center p-2 lg:text-3xl lg:font-extrabold">{form.loss_weight} kg</div>
-							</section>
-
-							<div 
-								id="section5" 
-								className="pt-8 flex gap-x-8 max-w-md mx-auto opacity-0 lg:order-3 lg:w-full lg:items-end">
-								<button 
-									type="button"
-									className={`${form.more_than_6_months === 0 ? 'bg-white' : 'bg-gray-300'} border border-gray-300 p-2 flex-1 select-none lg:text-xl lg:font-medium lg:h-11`}
-									onClick={() => setTimeFrame(0)}>
-									&lt; 6 MESES
-								</button>
-								<button 
-									type="button"
-									className={`${form.more_than_6_months === 1 ? 'bg-white' : 'bg-gray-300'} border border-stone-300 p-2 flex-1 select-none lg:text-xl lg:font-medium lg:h-11`}
-									onClick={() => setTimeFrame(1)}>
-									&gt; 6 MESES
-								</button>
-							</div>
-
-							<div id="section10" className="pt-8 max-w-md mx-auto lg:order-4 lg:w-full">
-								<div className="text-center lg:text-xl lg:text-left lg:font-medium">Edad:</div>
-								<div className="flex gap-x-8 mt-3">
-									<button 
-										type="button"
-										className={`${form.age === 0 ? 'bg-white' : 'bg-gray-300'} border border-gray-300 p-2 flex-1 select-none lg:text-xl lg:font-medium lg:h-11`}
-										onClick={() => setAge(0)}>
-										&lt; 70 AÑOS
-									</button>
-									<button 
-										type="button"
-										className={`${form.age === 1 ? 'bg-white' : 'bg-gray-300'} border border-stone-300 p-2 flex-1 select-none lg:text-xl lg:font-medium lg:h-11`}
-										onClick={() => setAge(1)}>
-										&gt; 70 AÑOS
-									</button>
-								</div>
-							</div>
-
-							<section 
-								id="section6" 
-								className="mt-8 space-y-2 max-w-md mx-auto opacity-0 lg:mt-0 lg:col-span-1 lg:w-full">
-								<div className="text-center lg:text-xl lg:text-left lg:font-medium">Cálculo de IMC actual (kg/m<sup className="text-xxs">2</sup>):</div>
-								<div className="bg-brand-aqua border-b-4 border-brand-dark text-2xl font-semibold text-center p-2 lg:text-3xl lg:font-extrabold">{form.imc} kg/m<sup className="text-xs">2</sup></div>
-							</section>
-						</div>
 
 						<div id="nextButton" className="pt-14 flex justify-center lg:pt-20">
 							<button 
@@ -393,17 +411,17 @@ export default function GlimPage(){
 
 								<div className="pt-6 space-y-6 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-12">
 									<div id="section7" className="space-y-2">
-										<div className="lg:text-xl">Pérdida de peso (%):</div>
+										<div className="select-none lg:text-xl">Pérdida de peso (%):</div>
 										<div className="bg-brand-aqua font-medium px-3 py-1.5 lg:text-xl">{form.loss_weight_info}</div>
 									</div>
 
 									<div id="section8" className="space-y-2">
-										<div className="lg:text-xl">Bajo IMC (kg/m<sup className="text-xxs">2</sup>):</div>
+										<div className="select-none lg:text-xl">Bajo IMC (kg/m<sup className="text-xxs">2</sup>):</div>
 										<div className="bg-brand-aqua font-medium px-3 py-1.5 lg:text-xl">{form.low_imc}</div>
 									</div>
 
 									<div id="section9" className="space-y-2">
-										<div className="lg:text-xl">Masa muscular reducida:</div>
+										<div className="select-none lg:text-xl">Masa muscular reducida:</div>
 										<select 
 											name="muscle_mass" 
 											onChange={handleSelectChange}
@@ -430,7 +448,7 @@ export default function GlimPage(){
 
 								<div className="pt-6 space-y-6 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-x-12">
 									<div id="section11" className="space-y-2">
-										<div className="lg:text-xl lg:leading-none">Reducción de la ingesta o asimilación de alimentos:</div>
+										<div className="select-none lg:text-xl lg:leading-none">Reducción de la ingesta o asimilación de alimentos:</div>
 										<select 
 											name="reduced_dietary_intake" 
 											onChange={handleSelectChange} 
@@ -444,7 +462,7 @@ export default function GlimPage(){
 									</div>
 
 									<div id="section12" className="space-y-2">
-										<div className="lg:text-xl lg:h-10">Inflamación:</div>
+										<div className="select-none lg:text-xl lg:h-10">Inflamación:</div>
 										<select 
 											name="inflammation" 
 											onChange={handleSelectChange} 
