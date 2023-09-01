@@ -19,7 +19,7 @@ const form_value = {
 	// inflammation: '',
 	
 	tall: '1,55',
-	weight: '50',
+	weight: '60',
 	usual_weight: '58,3',
 	muscle_mass: 'Déficit leve a moderado',
 	reduced_dietary_intake: '&lt;50% de las necesidades energéticas &gt;1 semana',
@@ -28,7 +28,7 @@ const form_value = {
 	// reduced_dietary_intake: 'No aplica',
 	// inflammation: 'No aplica',
 	
-	loss_weight_info: '',
+	loss_weight_info: 'No aplica',
 	low_imc: ''
 }
 
