@@ -485,6 +485,9 @@ export default function TermsPage(){
 		</div>
 
 
+		<div id="mainFooter" className="text-xxs text-center pb-8 pt-10 select-none lg:text-sm">{ process.env.FOOTER_CODE }</div>
+
+
 		<div className="h-10"></div>
 		<div className="bg-brand-aqua inset-x-0 bottom-0 fixed p-4 flex justify-center z-30">
 			<Link href="/" className="bg-brand-dark text-white text-lg font-bold text-center px-20 py-1.5 select-none tranisition-all hover:opacity-90">OK</Link>
