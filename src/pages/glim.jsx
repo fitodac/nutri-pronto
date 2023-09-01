@@ -5,29 +5,26 @@ import Layout from '../layouts/Layout'
 import Results from '../components/ResultsGlim'
 
 const form_value = {
-	// tall: '',
-	// weight: '',
-	// usual_weight: '',
-	// muscle_mass: '',
-	// reduced_dietary_intake: '',
-	// inflammation: '',
+	tall: '',
+	weight: '',
+	usual_weight: '',
+	muscle_mass: '',
+	reduced_dietary_intake: '',
+	inflammation: '',
 	more_than_6_months: null,
 	loss_weight: '00,00',
 	loss_weight_percent: 0,
 	imc: '00,00',
 
 	age: null,
-	
-	tall: '1,55',
-	weight: '80',
-	usual_weight: '58,3',
-	muscle_mass: 'Déficit leve a moderado',
-	reduced_dietary_intake: '&lt;50% de las necesidades energéticas &gt;1 semana',
-	inflammation: 'Relacionada a enfermedad/lesión aguda',
-	
-	// reduced_dietary_intake: 'No aplica',
-	// inflammation: 'No aplica',
-	
+
+	// tall: '1,55',
+	// weight: '80',
+	// usual_weight: '58,3',
+	// muscle_mass: 'Déficit leve a moderado',
+	// reduced_dietary_intake: '&lt;50% de las necesidades energéticas &gt;1 semana',
+	// inflammation: 'Relacionada a enfermedad/lesión aguda',
+
 	loss_weight_info: 'No aplica',
 	low_imc: ''
 }
@@ -100,7 +97,7 @@ export default function GlimPage(){
 		gsap.set('#section4', 	{ top: 60, position: 'relative', opacity: 0 })
 		gsap.set('#section5', 	{ top: 60, position: 'relative', opacity: 0 })
 		gsap.set('#section6', 	{ top: 60, position: 'relative', opacity: 0 })
-		gsap.set('#section10', 	{ top: 60, position: 'relative', opacity: 0 })
+		gsap.set('#section7', 	{ top: 60, position: 'relative', opacity: 0 })
 		gsap.set('#nextButton', { top: 60, position: 'relative', opacity: 0 })
 
 		gsap.to('#pageTitle', 	{ top: 0, opacity: 1 })
@@ -111,7 +108,7 @@ export default function GlimPage(){
 		gsap.to('#section4', 		{ top: 0, opacity: 1, delay: .5 })
 		gsap.to('#section5', 		{ top: 0, opacity: 1, delay: .6 })
 		gsap.to('#section6', 		{ top: 0, opacity: 1, delay: .7 })
-		gsap.to('#section10', 	{ top: 0, opacity: 1, delay: .8 })
+		gsap.to('#section7', 		{ top: 0, opacity: 1, delay: .8 })
 		gsap.to('#nextButton', 	{ top: 0, opacity: 1, delay: .9 })
 	}, [])
 
@@ -213,35 +210,37 @@ export default function GlimPage(){
 		setTimeout(() => {
 			window.scrollTo({ top: 0, behavior: 'smooth' })
 
+			gsap.set('#section8', 			{ top: 60, position: 'relative', opacity: 0 })
 			gsap.set('#pageTitle2', 		{ top: 60, position: 'relative', opacity: 0 })
 			gsap.set('#introText2', 		{ top: 60, position: 'relative', opacity: 0 })
 			gsap.set('#bar1', 					{ top: 60, position: 'relative', opacity: 0 })
 			gsap.set('#title1', 				{ top: 60, position: 'relative', opacity: 0 })
 			gsap.set('#text1', 					{ top: 60, position: 'relative', opacity: 0 })
-			gsap.set('#section7', 			{ top: 60, position: 'relative', opacity: 0 })
-			gsap.set('#section8', 			{ top: 60, position: 'relative', opacity: 0 })
 			gsap.set('#section9', 			{ top: 60, position: 'relative', opacity: 0 })
+			gsap.set('#section10', 			{ top: 60, position: 'relative', opacity: 0 })
+			gsap.set('#section11', 			{ top: 60, position: 'relative', opacity: 0 })
 			gsap.set('#bar2', 					{ top: 60, position: 'relative', opacity: 0 })
 			gsap.set('#title2', 				{ top: 60, position: 'relative', opacity: 0 })
 			gsap.set('#text2', 					{ top: 60, position: 'relative', opacity: 0 })
-			gsap.set('#section11', 			{ top: 60, position: 'relative', opacity: 0 })
 			gsap.set('#section12', 			{ top: 60, position: 'relative', opacity: 0 })
+			gsap.set('#section13', 			{ top: 60, position: 'relative', opacity: 0 })
 			gsap.set('#submitButton', 	{ top: 60, position: 'relative', opacity: 0 })
 
-			gsap.to('#section2', 				{ opacity: 1, delay: .1 })
+			gsap.to('#section8', 				{ opacity: 1, delay: .1 })
 			gsap.to('#pageTitle2', 			{ top: 0, opacity: 1, delay: .2 })
 			gsap.to('#introText2', 			{ top: 0, opacity: 1, delay: .3 })
 			gsap.to('#bar1', 						{ top: 0, opacity: 1, delay: .4 })
 			gsap.to('#title1', 					{ top: 0, opacity: 1, delay: .5 })
 			gsap.to('#text1', 					{ top: 0, opacity: 1, delay: .6 })
-			gsap.to('#section7', 				{ top: 0, opacity: 1, delay: .7 })
-			gsap.to('#section8', 				{ top: 0, opacity: 1, delay: .8 })
+			gsap.to('#section9', 				{ top: 0, opacity: 1, delay: .7 })
+			gsap.to('#section10', 			{ top: 0, opacity: 1, delay: .8 })
 			gsap.to('#section9', 				{ top: 0, opacity: 1, delay: .9 })
+			gsap.to('#section11', 			{ top: 0, opacity: 1, delay: 1.4 })
 			gsap.to('#title2', 					{ top: 0, opacity: 1, delay: 1.1 })
 			gsap.to('#bar2', 						{ top: 0, opacity: 1, delay: 1.2 })
 			gsap.to('#text2', 					{ top: 0, opacity: 1, delay: 1.3 })
-			gsap.to('#section11', 			{ top: 0, opacity: 1, delay: 1.4 })
 			gsap.to('#section12', 			{ top: 0, opacity: 1, delay: 1.5 })
+			gsap.to('#section13', 			{ top: 0, opacity: 1, delay: 1.5 })
 			gsap.to('#submitButton', 		{ top: 0, opacity: 1, delay: 1.6 })
 		}, 100)
 	}
@@ -266,7 +265,7 @@ export default function GlimPage(){
 	return (<Layout status={breadcrumb}>
 
 		{ !sent ? 
-			(<form className="mt-6" onSubmit={submit}>
+			(<form className="mt-6 mb-16" onSubmit={submit}>
 				{ step === 1 ? 
 					(<>
 						<div className="text-center py-8 md:pt-16 md:pb-10">
@@ -283,11 +282,44 @@ export default function GlimPage(){
 
 
 
-							<div className="mt-3 space-y-3 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:gap-y-6 lg:space-y-0">
-								<div className="">
-									<label 
-										id="section1" 
-										className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center opacity-0">
+							<div className="mt-6 space-y-5 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:gap-y-6 lg:space-y-0">
+
+								<div id="section1">
+									<div className="max-w-md mx-auto flex items-center gap-x-4 lg:w-full lg:mt-2">
+										<div className="select-none">Edad:</div>
+
+										<span 
+											htmlFor="plus70" 
+											className="inline-flex items-center gap-2 cursor-pointer select-none"
+											onClick={() => setAge(0)}>
+											<span className="border-2 border-brand-aqua w-6 h-6 block">
+												{ 
+													form.age === 0 
+													? (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z" fill="rgba(113,195,189,1)"></path></svg>) 
+													: null 
+												}
+											</span>
+											<span className="font-medium text-sm">&lt; 70 AÑOS</span>
+										</span>
+
+										<span 
+											htmlFor="less70" 
+											className="inline-flex items-center gap-2 cursor-pointer select-none"
+											onClick={() => setAge(1)}>
+											<span className="border-2 border-brand-aqua w-6 h-6 block">
+												{ 
+													form.age === 1 
+													? (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z" fill="rgba(113,195,189,1)"></path></svg>) 
+													: null 
+												}
+											</span>
+											<span className="font-medium text-sm">&gt; 70 AÑOS</span>
+										</span>
+									</div>
+								</div>
+
+								<div id="section2">
+									<label className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center">
 										<span className="pl-4 py-2 w-1/2 select-none whitespace-nowrap lg:font-medium">Talla (m):</span>
 										<input 
 											type="text" 
@@ -298,10 +330,8 @@ export default function GlimPage(){
 									</label>
 								</div>
 
-								<div className="">
-									<label 
-										id="section2" 
-										className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center opacity-0">
+								<div id="section3">
+									<label className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center">
 										<span className="pl-4 py-2 w-1/2 select-none whitespace-nowrap lg:font-medium">Peso actual (kg):</span>
 										<input 
 											type="text" 
@@ -312,10 +342,8 @@ export default function GlimPage(){
 									</label>
 								</div>
 
-								<div className="">
-									<label 
-										id="section3" 
-										className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center opacity-0">
+								<div id="section4">
+									<label className="bg-brand-aqua-300 border-b-2 border-brand-dark text-brand-aqua-600 flex items-center">
 										<span className="pl-4 py-2 w-1/2 select-none whitespace-nowrap lg:font-medium">Peso habitual (kg):</span>
 										<input 
 											type="text" 
@@ -326,62 +354,55 @@ export default function GlimPage(){
 									</label>
 								</div>
 
-								<div className="">
-									<section 
-										id="section4" 
-										className="mt-8 space-y-2 max-w-md mx-auto opacity-0 lg:mt-0 lg:col-span-1 lg:w-full lg:max-w-full">
+								<div id="section5">
+									<section className="space-y-2 max-w-md mx-auto lg:mt-0 lg:col-span-1 lg:w-full lg:max-w-full">
 										<div className="text-center select-none lg:text-xl lg:text-left lg:font-medium">Cálculo peso perdido (kg):</div>
 										<div className="bg-brand-aqua border-b-4 border-brand-dark text-2xl font-semibold text-center p-2 lg:text-3xl lg:font-extrabold">{form.loss_weight} kg</div>
 									</section>
 								</div>
 
-								<div 
-									id="section5" 
-									className="pt-8 flex gap-x-8 max-w-md mx-auto opacity-0 lg:order-3 lg:w-full lg:items-end">
-									<button 
-										type="button"
-										className={`${form.more_than_6_months === 0 ? 'bg-white' : 'bg-gray-300'} border border-gray-300 p-2 flex-1 select-none lg:text-xl lg:font-medium lg:h-11`}
-										onClick={() => setTimeFrame(0)}>
-										&lt; 6 MESES
-									</button>
-									<button 
-										type="button"
-										className={`${form.more_than_6_months === 1 ? 'bg-white' : 'bg-gray-300'} border border-stone-300 p-2 flex-1 select-none lg:text-xl lg:font-medium lg:h-11`}
-										onClick={() => setTimeFrame(1)}>
-										&gt; 6 MESES
-									</button>
+								<div id="section6">
+									<section className="space-y-2 max-w-md mx-auto lg:mt-0 lg:col-span-1 lg:w-full lg:max-w-full">
+										<div className="text-center select-none lg:text-xl lg:text-left lg:font-medium">Cálculo de IMC actual (kg/m<sup className="text-xxs">2</sup>):</div>
+										<div className="bg-brand-aqua border-b-4 border-brand-dark text-2xl font-semibold text-center p-2 lg:text-3xl lg:font-extrabold">{form.imc} kg/m<sup className="text-xs">2</sup></div>
+									</section>
 								</div>
 
+								<div id="section7">
+									<div className="flex gap-x-8 max-w-md mx-auto lg:w-full lg:items-end">
+										
+										<span 
+											htmlFor="plus70" 
+											className="inline-flex items-center gap-2 cursor-pointer select-none"
+											onClick={() => setTimeFrame(0)}>
+											<span className="border-2 border-brand-aqua w-6 h-6 block">
+												{ 
+													form.more_than_6_months === 0 
+													? (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z" fill="rgba(113,195,189,1)"></path></svg>) 
+													: null 
+												}
+											</span>
+											<span className="font-medium text-sm">&lt; 6 MESES</span>
+										</span>
 
-								<div id="section10" className="pt-8 max-w-md mx-auto lg:order-4 lg:w-full">
-									<div className="text-center select-none lg:text-xl lg:text-left lg:font-medium">Edad:</div>
-									<div className="flex gap-x-8 mt-3">
-										<button 
-											type="button"
-											className={`${form.age === 0 ? 'bg-white' : 'bg-gray-300'} border border-gray-300 p-2 flex-1 select-none lg:text-xl lg:font-medium lg:h-11`}
-											onClick={() => setAge(0)}>
-											&lt; 70 AÑOS
-										</button>
-										<button 
-											type="button"
-											className={`${form.age === 1 ? 'bg-white' : 'bg-gray-300'} border border-stone-300 p-2 flex-1 select-none lg:text-xl lg:font-medium lg:h-11`}
-											onClick={() => setAge(1)}>
-											&gt; 70 AÑOS
-										</button>
+										<span 
+											htmlFor="less70" 
+											className="inline-flex items-center gap-2 cursor-pointer select-none"
+											onClick={() => setTimeFrame(1)}>
+											<span className="border-2 border-brand-aqua w-6 h-6 block">
+												{ 
+													form.more_than_6_months === 1 
+													? (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z" fill="rgba(113,195,189,1)"></path></svg>) 
+													: null 
+												}
+											</span>
+											<span className="font-medium text-sm">&gt; 6 MESES</span>
+										</span>
 									</div>
 								</div>
 
-
-								<section 
-									id="section6" 
-									className="mt-8 space-y-2 max-w-md mx-auto opacity-0 lg:mt-0 lg:col-span-1 lg:w-full lg:max-w-full">
-									<div className="text-center select-none lg:text-xl lg:text-left lg:font-medium">Cálculo de IMC actual (kg/m<sup className="text-xxs">2</sup>):</div>
-									<div className="bg-brand-aqua border-b-4 border-brand-dark text-2xl font-semibold text-center p-2 lg:text-3xl lg:font-extrabold">{form.imc} kg/m<sup className="text-xs">2</sup></div>
-								</section>
-
 							</div>
 						</section>
-
 
 						<div id="nextButton" className="pt-14 flex justify-center lg:pt-20">
 							<button 
@@ -393,7 +414,7 @@ export default function GlimPage(){
 						</div>
 					</>)
 					:
-					(<div id="section2" className="opacity-0">
+					(<div id="section8" className="opacity-0">
 						<div className="text-center pt-8 pb-6 max-w-xs mx-auto md:pt-16 md:pb-10 lg:max-w-full lg:pb-2">
 							<div id="pageTitle2" className="page-title opacity-0">CRITERIOS GLIM PARA EL DIAGNÓSTICO DE DESNUTRICIÓN*</div>
 						</div>
@@ -410,17 +431,17 @@ export default function GlimPage(){
 								<div id="text1" className="text-brand-aqua-600 font-medium leading-tight lg:text-xl">Por favor, responda las siguientes preguntas sobre su paciente:</div>
 
 								<div className="pt-6 space-y-6 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-12">
-									<div id="section7" className="space-y-2">
+									<div id="section9" className="space-y-2">
 										<div className="select-none lg:text-xl">Pérdida de peso (%):</div>
 										<div className="bg-brand-aqua font-medium px-3 py-1.5 lg:text-xl">{form.loss_weight_info}</div>
 									</div>
 
-									<div id="section8" className="space-y-2">
+									<div id="section10" className="space-y-2">
 										<div className="select-none lg:text-xl">Bajo IMC (kg/m<sup className="text-xxs">2</sup>):</div>
 										<div className="bg-brand-aqua font-medium px-3 py-1.5 lg:text-xl">{form.low_imc}</div>
 									</div>
 
-									<div id="section9" className="space-y-2">
+									<div id="section11" className="space-y-2">
 										<div className="select-none lg:text-xl">Masa muscular reducida:</div>
 										<select 
 											name="muscle_mass" 
@@ -447,7 +468,7 @@ export default function GlimPage(){
 								<div id="text2" className="text-brand-aqua-600 font-medium leading-tight lg:text-xl">Por favor, responda las siguientes preguntas sobre su paciente:</div>
 
 								<div className="pt-6 space-y-6 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-x-12">
-									<div id="section11" className="space-y-2">
+									<div id="section12" className="space-y-2">
 										<div className="select-none lg:text-xl lg:leading-none">Reducción de la ingesta o asimilación de alimentos:</div>
 										<select 
 											name="reduced_dietary_intake" 
@@ -461,7 +482,7 @@ export default function GlimPage(){
 										</select>
 									</div>
 
-									<div id="section12" className="space-y-2">
+									<div id="section13" className="space-y-2">
 										<div className="select-none lg:text-xl lg:h-10">Inflamación:</div>
 										<select 
 											name="inflammation" 
