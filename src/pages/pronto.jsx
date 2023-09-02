@@ -25,9 +25,10 @@ const list2 = [
 ]
 
 const list3 = [
-	['¿Cuál es su peso habitual?'],
-	['¿Su ropa/anillos/dentaduras postizas se ajustan de manera mas holgadas de lo habitual?'],
-	['¿Ha tenido que añadir agujeros a su cinturón?']
+	['¿Ha notado cambios en su capacidad de llevar a cabo actividades de la vida diaria?',
+	'Por ejemplo: abrir botellas, levantarse de una silla, subir escaleras o llevar objetos pesados'],
+	['¿Se siente cansado?'],
+	['¿Siente a sus músculos más débiles?']
 ]
 
 const form_value = { option1: null, option2: null, option3: null }
