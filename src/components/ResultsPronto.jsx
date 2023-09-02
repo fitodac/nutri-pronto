@@ -47,16 +47,19 @@ export default function ResultsPage({props}){
 		doc.setFont('helvetica', 'normal')
 		doc.text(diagnosis === 'SÍ' ? Content.recommendations.y.title : Content.recommendations.n.title, 100, 69, { align: 'center' })
 
-		await html2canvas(document.getElementById('recommendationIcon1'))
-		.then(canvas => {
-			doc.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 45, 80, 10, diagnosis === 'SÍ' ? 13 : 11, 'recommendationIcon1', 'NONE')
-		})
+		if( diagnosis === 'SÍ' ){
+			doc.addImage('../pdf-images/bottles.png', 'PNG', 45, 80, 10, 13, 'recommendationIcon1', 'NONE')
+		}else{
+			doc.addImage('../pdf-images/scales.png', 'PNG', 45, 80, 10, 11, 'recommendationIcon1', 'NONE')
+		}
 		doc.text(diagnosis === 'SÍ' ? Content.recommendations.y.a : `${Content.recommendations.n.a[0]} ${Content.recommendations.n.a[1]} ${Content.recommendations.n.a[2]}`, 63, 83, { maxWidth: 95})
 
-		await html2canvas(document.getElementById('recommendationIcon2'))
-		.then(canvas => {
-			doc.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 45, 100, 12, 13, 'recommendationIcon2', 'NONE')
-		})
+
+		if( diagnosis === 'SÍ' ){
+			doc.addImage('../pdf-images/diagram.png', 'PNG', 45, 100, 12, 13, 'recommendationIcon2', 'NONE')
+		}else{
+			doc.addImage('../pdf-images/bottle-apple.png', 'PNG', 45, 100, 12, 13, 'recommendationIcon2', 'NONE')
+		}
 		doc.text(diagnosis === 'SÍ' ? Content.recommendations.y.b : `${Content.recommendations.n.b[0]} ${Content.recommendations.n.b[1]} ${Content.recommendations.n.b[2]}`, 63, 103, { maxWidth: 95 })
 
 		if( diagnosis === 'SÍ' ){

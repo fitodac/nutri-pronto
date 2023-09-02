@@ -18,7 +18,6 @@ export default function ResultsPage({props}){
 
 	// PDF
 	const generatePDF = async () => {
-		console.log('props', props)
 		var doc = new jsPDF('p', 'mm', [200, (props.diagnosis === 'SÍ' ? 310 : 280)])
 
 		doc.setTextColor(30, 39, 46)
@@ -70,16 +69,18 @@ export default function ResultsPage({props}){
 		doc.setFont('helvetica', 'normal')
 		doc.text(props.diagnosis === 'SÍ' ? Content.recommendations.y.title : Content.recommendations.n.title, 100, 114, { align: 'center' })
 
-		await html2canvas(document.getElementById('recommendationIcon1'))
-		.then(canvas => {
-			doc.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 45, 122, 10, diagnosis === 'SÍ' ? 13 : 11, 'recommendationIcon1', 'NONE')
-		})
+		if( diagnosis === 'SÍ' ){
+			doc.addImage('../pdf-images/bottles.png', 'PNG', 45, 122, 10, 13, 'recommendationIcon1', 'NONE')
+		}else{
+			doc.addImage('../pdf-images/scales.png', 'PNG', 45, 122, 10, 11, 'recommendationIcon1', 'NONE')
+		}
 		doc.text(props.diagnosis === 'SÍ' ? Content.recommendations.y.a : `${Content.recommendations.n.a[0]} ${Content.recommendations.n.a[1]} ${Content.recommendations.n.a[2]}`, 63, 125, { maxWidth: 95})
 
-		await html2canvas(document.getElementById('recommendationIcon2'))
-		.then(canvas => {
-			doc.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 45, 142, 12, 13, 'recommendationIcon2', 'NONE')
-		})
+		if( diagnosis === 'SÍ' ){
+			doc.addImage('../pdf-images/diagram.png', 'PNG', 45, 142, 12, 13, 'recommendationIcon2', 'NONE')
+		}else{
+			doc.addImage('../pdf-images/bottle-apple.png', 'PNG', 45, 142, 12, 13, 'recommendationIcon2', 'NONE')
+		}
 		doc.text(props.diagnosis === 'SÍ' ? Content.recommendations.y.b : `${Content.recommendations.n.b[0]} ${Content.recommendations.n.b[1]} ${Content.recommendations.n.b[2]}`, 63, 145, { maxWidth: 95 })
 
 		if( props.diagnosis === 'SÍ' ){
@@ -128,7 +129,7 @@ export default function ResultsPage({props}){
 		doc.setTextColor(30, 39, 46)
 		doc.setFont('helvetica', 'bold')
 		doc.setFontSize(18)
-		doc.text(`${props.loss_weight.toString()} kg`, 100, top+60, { align: 'center' })
+		doc.text(props.loss_weight, 100, top+60, { align: 'center' })
 
 		// doc.output('dataurlnewwindow')
 		doc.save(`pronto-${Date.now()}.pdf`)
