@@ -6,9 +6,9 @@ import Results from '../components/ResultsGlim'
 import Matomo from '../utils/matomo'
 
 const form_value = {
-	tall: '',
-	weight: '',
-	usual_weight: '',
+	// tall: '',
+	// weight: '',
+	// usual_weight: '',
 	muscle_mass: '',
 	reduced_dietary_intake: '',
 	inflammation: '',
@@ -18,15 +18,15 @@ const form_value = {
 	imc: '00,00',
 	age: null,
 
-	// tall: '1,55',
-	// weight: '80',
-	// usual_weight: '58,3',
+	tall: '1,80',
+	weight: '70',
+	usual_weight: '65',
 	// muscle_mass: 'Déficit leve a moderado',
 	// reduced_dietary_intake: '&lt;50% de las necesidades energéticas &gt;1 semana',
 	// inflammation: 'Relacionada a enfermedad/lesión aguda',
 
 	loss_weight_info: 'No aplica',
-	low_imc: ''
+	low_imc: 'No aplica'
 }
 
 
@@ -37,7 +37,6 @@ const calculator = form => {
 	const tall = form.tall.indexOf(',') ? parseFloat(form.tall.replace(',','.')) : parseFloat(form.tall)
 	const weight = form.weight.indexOf(',') ? parseFloat(form.weight.replace(',','.')) : parseFloat(form.weight)
 	const usual_weight = form.usual_weight.indexOf(',') ? parseFloat(form.usual_weight.replace(',','.')) : parseFloat(form.usual_weight)
-	const imc = form.imc.indexOf(',') ? parseFloat(form.imc.replace(',','.')) : parseFloat(form.imc)
 	const f = {...form}
 	
 	if( weight && usual_weight ){
@@ -54,20 +53,23 @@ const calculator = form => {
 	if( weight && tall ) f.imc = (weight / Math.pow(tall, 2)).toFixed(2).replace('.',',')
 
 
+	const imc = f.imc.indexOf(',') ? parseFloat(f.imc.replace(',','.')) : parseFloat(f.imc)
+
 	if( imc < 22 ){
 		if( imc < 20 ){
 			if( form.age ){
 				f.low_imc = '< 20 en > 70 años'
 			}else{
 				if( imc < 18.5 ){
-					if( !form.age ){}
-					f.low_imc = '< 18,5 en < 70 años'
+					if( !form.age ){ f.low_imc = '< 18,5 en < 70 años' }
 				}else{
 					if( !form.age ){}
 				}
 			}
-		}else{
+		}else if( imc >= 20 ){
 			if( form.age ) f.low_imc = '< 22 en > 70 años'
+		}else{
+			f.low_imc = 'No aplica'
 		}
 	}else{
 		f.low_imc = 'No aplica'
@@ -203,7 +205,7 @@ export default function GlimPage(){
 			!form.tall.length 
 			|| !form.weight.length 
 			|| !form.usual_weight.length 
-			|| null === form.more_than_6_months 
+			// || null === form.more_than_6_months 
 			|| null === form.age 
 		){
 			showError()
@@ -266,7 +268,6 @@ export default function GlimPage(){
 		}
 		setBreadcrumb('result')
 		window.scrollTo({ top: 0, behavior: 'smooth' })
-		// console.log('form', form)
 		setSent(true)
 	}
 
