@@ -3,6 +3,7 @@ import gsap from 'gsap'
 
 import Layout from '../layouts/Layout'
 import Results from '../components/ResultsGlim'
+import Matomo from '../utils/matomo'
 
 const form_value = {
 	tall: '',
@@ -15,7 +16,6 @@ const form_value = {
 	loss_weight: '00,00',
 	loss_weight_percent: 0,
 	imc: '00,00',
-
 	age: null,
 
 	// tall: '1,55',
@@ -88,6 +88,8 @@ export default function GlimPage(){
 	const [tall_limit_error, setTall_limit_error] = useState(false)
 
 	useEffect(() => {
+		Matomo()
+
 		setForm(calculator(form))
 
 		gsap.set('#pageTitle', 	{ top: 60, position: 'relative', opacity: 0 })

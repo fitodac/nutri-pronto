@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import Header from '../components/Header'
 import Link from 'next/link'
+import Matomo from '../utils/matomo'
 
 import '../css/global.css'
 
@@ -11,6 +12,8 @@ const button_class = `bg-brand-dark text-sm font-bold text-white text-center lea
 export default function StartPage(){
 
 	const [forbiden, setForbiden] = useState(false)
+
+	useEffect(() => Matomo(), [])
 
 
 	return (<main className="bg-brand-aqua text-brand-dark min-h-screen flex flex-col">

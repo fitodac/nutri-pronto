@@ -4,6 +4,7 @@ import gsap from 'gsap'
 import Layout from '../layouts/Layout'
 import List from '../components/List'
 import Results from '../components/ResultsPronto'
+import Matomo from '../utils/matomo'
 
 const label_class = 'flex items-center gap-x-2 leading-none cursor-pointer select-none group'
 const input_class = `hidden 
@@ -43,6 +44,8 @@ export default function ProntoPage(){
 	const [breadcrumb, setBreadcrumb] = useState('pronto')
 
 	useEffect(() => {
+		Matomo()
+
 		sessionStorage.setItem('nutripronto', 1)
 		sessionStorage.removeItem('nutripronto_result')
 

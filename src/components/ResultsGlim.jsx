@@ -18,6 +18,7 @@ export default function ResultsPage({props}){
 
 	// PDF
 	const generatePDF = async () => {
+		console.log('props', props)
 		var doc = new jsPDF('p', 'mm', [200, (props.diagnosis === 'SÍ' ? 310 : 280)])
 
 		doc.setTextColor(30, 39, 46)
@@ -67,7 +68,6 @@ export default function ResultsPage({props}){
 
 		doc.setFontSize(12)
 		doc.setFont('helvetica', 'normal')
-		console.log('diagnosis', diagnosis === 'SÍ')
 		doc.text(props.diagnosis === 'SÍ' ? Content.recommendations.y.title : Content.recommendations.n.title, 100, 114, { align: 'center' })
 
 		await html2canvas(document.getElementById('recommendationIcon1'))
@@ -128,7 +128,7 @@ export default function ResultsPage({props}){
 		doc.setTextColor(30, 39, 46)
 		doc.setFont('helvetica', 'bold')
 		doc.setFontSize(18)
-		doc.text(props.loss_weight, 100, top+60, { align: 'center' })
+		doc.text(`${props.loss_weight.toString()} kg`, 100, top+60, { align: 'center' })
 
 		// doc.output('dataurlnewwindow')
 		doc.save(`pronto-${Date.now()}.pdf`)

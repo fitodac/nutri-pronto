@@ -69,8 +69,8 @@ export default function ResultsPage({props}){
 			doc.link(60, 130, 78, 30, {url: process.env.LINK_2_PDF_DOCUMENT})
 		}
 
-		doc.output('dataurlnewwindow')
-		// doc.save(`pronto-${Date.now()}.pdf`)
+		// doc.output('dataurlnewwindow')
+		doc.save(`pronto-${Date.now()}.pdf`)
 	}
 
 

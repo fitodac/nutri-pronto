@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import gsap from 'gsap'
+import Matomo from '../utils/matomo'
 
 import Image from 'next/image'
 import Link from 'next/link'
@@ -13,6 +14,8 @@ export default function HomePage(){
 
 	// Animation
 	useEffect(() => {
+		Matomo()
+
 		if( sessionStorage.getItem('nutripronto') ) router.push('/pronto')
 
 		gsap.to('#logo', 									{ scale: 1, opacity: 1, delay: .3 })

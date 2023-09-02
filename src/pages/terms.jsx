@@ -1,9 +1,16 @@
+import { useEffect } from 'react'
+
 import Layout from '../layouts/Layout'
 import Link from 'next/link'
+import Matomo from '../utils/matomo'
 
 const section_title = 'font-medium md:font-semibold'
 
 export default function TermsPage(){
+
+	useEffect(() => Matomo(), [])
+
+
 	return (<Layout>
 		<div className="text-center py-8 md:py-20">
 			<div className="page-title">TÉRMINOS Y CONDICIONES</div>
