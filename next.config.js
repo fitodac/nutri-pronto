@@ -9,8 +9,8 @@ const nextConfig = {
 
 
 	env: {
-		FOOTER_CODE: process.env.FOOTER_CODE,
-		LINK_2_PDF_DOCUMENT: process.env.LINK_2_PDF_DOCUMENT
+		FOOTER_CODE: process.env.NEXT_PUBLIC_FOOTER_CODE,
+		LINK_2_PDF_DOCUMENT: process.env.NEXT_PUBLIC_LINK_2_PDF_DOCUMENT
 	},
 }
 

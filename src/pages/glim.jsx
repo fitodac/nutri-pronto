@@ -45,7 +45,7 @@ const calculator = form => {
 		f.loss_weight = result <= 0 ? 0 : result.toFixed(2).replace('.',',')
 		f.loss_weight_percent = (parseFloat(f.loss_weight) / usual_weight) * 100
 
-		if( f.loss_weight_percent <= 10 && f.loss_weight_percent > 5 ) f.loss_weight_info = `5-10% en ${calcSixMonths(f.more_than_6_months)}`
+		if( f.loss_weight_percent <= 10 && f.loss_weight_percent >= 5 ) f.loss_weight_info = `5-10% en ${calcSixMonths(f.more_than_6_months)}`
 		if( f.loss_weight_percent == 10 ) f.loss_weight_info = `10% en ${calcSixMonths(f.more_than_6_months)}`
 		if( f.loss_weight_percent > 10 && f.loss_weight_percent < 20 ) f.loss_weight_info = `10-20% ${calcSixMonths(f.more_than_6_months)}`
 		if( f.loss_weight_percent >= 20 ) f.loss_weight_info = `20% en ${calcSixMonths(f.more_than_6_months)}`
@@ -85,6 +85,7 @@ export default function GlimPage(){
 	const [diagnosis, setDiagnosis] = useState(null)
 	const [breadcrumb, setBreadcrumb] = useState('glim')
 	const [step, setStep] = useState(1)
+	const [tall_limit_error, setTall_limit_error] = useState(false)
 
 	useEffect(() => {
 		setForm(calculator(form))
@@ -161,10 +162,12 @@ export default function GlimPage(){
 		const tall_limit = 2.5
 
 		if( e.target.name === 'tall' ){
+			setTall_limit_error(false)
 			const tall = e.target.value.indexOf(',') ? Number(e.target.value.replace(',', '.')) : Number(e.target.value)
 			if( tall > tall_limit ){
 				f.tall = '2,5'
 				e.target.value = '2,5'
+				setTall_limit_error(true)
 			}
 		}
 
@@ -254,7 +257,11 @@ export default function GlimPage(){
 			return
 		}
 
-		( 'No aplica' === form.reduced_dietary_intake && 'No aplica' == form.inflammation ) ? setDiagnosis('NO') : setDiagnosis('SÍ')
+		if( 'No aplica' === form.muscle_mass ){
+			setDiagnosis('NO')
+		}else{
+			( 'No aplica' === form.reduced_dietary_intake && 'No aplica' == form.inflammation ) ? setDiagnosis('NO') : setDiagnosis('SÍ')
+		}
 		setBreadcrumb('result')
 		window.scrollTo({ top: 0, behavior: 'smooth' })
 		// console.log('form', form)
@@ -285,7 +292,7 @@ export default function GlimPage(){
 							<div className="mt-6 space-y-5 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:gap-y-6 lg:space-y-0">
 
 								<div id="section1">
-									<div className="max-w-md mx-auto flex items-center gap-x-4 lg:w-full lg:mt-2">
+									<div className="flex items-center gap-x-4 lg:w-full lg:mt-2">
 										<div className="select-none">Edad:</div>
 
 										<span 
@@ -328,6 +335,8 @@ export default function GlimPage(){
 											onChange={handleChange}
 											defaultValue={form.tall} />
 									</label>
+
+									{ tall_limit_error ? (<span className="text-red-500 text-sm font-medium">El valor límite son 2,5 metros</span>) : null }
 								</div>
 
 								<div id="section3">
@@ -369,8 +378,10 @@ export default function GlimPage(){
 								</div>
 
 								<div id="section7">
-									<div className="flex gap-x-8 max-w-md mx-auto lg:w-full lg:items-end">
-										
+									<div className="select-none">La pérdida de peso del paciente ha sido en:</div>
+
+									<div className="flex gap-x-8 mt-2 lg:w-full lg:items-end">
+
 										<span 
 											htmlFor="plus70" 
 											className="inline-flex items-center gap-2 cursor-pointer select-none"
