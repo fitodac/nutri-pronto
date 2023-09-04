@@ -18,9 +18,9 @@ const form_value = {
 	imc: '00,00',
 	age: null,
 
-	// tall: '1,80',
-	// weight: '70',
-	// usual_weight: '65',
+	// tall: '1,63',
+	// weight: '50',
+	// usual_weight: '50',
 	// muscle_mass: 'Déficit leve a moderado',
 	// reduced_dietary_intake: '&lt;50% de las necesidades energéticas &gt;1 semana',
 	// inflammation: 'Relacionada a enfermedad/lesión aguda',
@@ -30,7 +30,10 @@ const form_value = {
 }
 
 
-const calcSixMonths = val => val ? 'más de 6 meses' : 'menos de 6 meses'
+const calcSixMonths = val => {
+	if( null === val ) return ''
+	return val ? 'en más de 6 meses' : 'en menos de 6 meses'
+}
 
 
 const calculator = form => {
@@ -40,22 +43,23 @@ const calculator = form => {
 	const f = {...form}
 	
 	if( weight && usual_weight ){
-		console.log('peso:', weight, usual_weight)
 		const result = usual_weight - weight
 		f.loss_weight = result <= 0 ? 0 : result.toFixed(2).replace('.',',')
 		f.loss_weight_percent = (parseFloat(f.loss_weight) / usual_weight) * 100
+		
 
-		if( f.loss_weight_percent <= 10 && f.loss_weight_percent >= 5 ) f.loss_weight_info = `5-10% en ${calcSixMonths(f.more_than_6_months)}`
-		if( f.loss_weight_percent == 10 ) f.loss_weight_info = `10% en ${calcSixMonths(f.more_than_6_months)}`
+		if( f.loss_weight_percent <= 10 && f.loss_weight_percent >= 5 ) f.loss_weight_info = `5-10% ${calcSixMonths(f.more_than_6_months)}`
+		if( f.loss_weight_percent == 10 ) f.loss_weight_info = `10% ${calcSixMonths(f.more_than_6_months)}`
 		if( f.loss_weight_percent > 10 && f.loss_weight_percent < 20 ) f.loss_weight_info = `10-20% ${calcSixMonths(f.more_than_6_months)}`
-		if( f.loss_weight_percent >= 20 ) f.loss_weight_info = `20% en ${calcSixMonths(f.more_than_6_months)}`
-		if( f.loss_weight_percent === f.loss_weight_percent ) f.loss_weight_info = 'No aplica'
+		if( f.loss_weight_percent >= 20 ) f.loss_weight_info = `20% ${calcSixMonths(f.more_than_6_months)}`
+		if( weight === usual_weight ) f.loss_weight_info = 'No aplica'
 	}
 	
 	if( weight && tall ) f.imc = (weight / Math.pow(tall, 2)).toFixed(2).replace('.',',')
 
 
 	const imc = f.imc.indexOf(',') ? parseFloat(f.imc.replace(',','.')) : parseFloat(f.imc)
+	// console.log('datos:', imc)
 
 	if( imc < 22 ){
 		if( imc < 20 ){
